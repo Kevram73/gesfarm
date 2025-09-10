@@ -43,6 +43,10 @@ COPY . /var/www
 # Copier la configuration PHP personnalisée
 COPY docker/php/local.ini /usr/local/etc/php/conf.d/local.ini
 
+# Copier le script de démarrage
+COPY docker/php/start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
+
 # Définir les permissions
 RUN chown -R www:www /var/www \
     && chmod -R 755 /var/www/storage \
@@ -62,9 +66,5 @@ RUN npm install && npm run build
 
 # Exposer le port 9000 pour PHP-FPM
 EXPOSE 9000
-
-# Script de démarrage
-COPY docker/php/start.sh /usr/local/bin/start.sh
-RUN chmod +x /usr/local/bin/start.sh
 
 CMD ["/usr/local/bin/start.sh"]
