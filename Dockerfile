@@ -32,7 +32,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     zip \
     opcache
 
-# Installer Node.js et npm (méthode plus stable)
+# Installer Node.js et npm
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
@@ -44,23 +44,27 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN groupadd -g 1000 www \
     && useradd -u 1000 -ms /bin/bash -g www www
 
+# Créer le répertoire de l'application et définir les permissions
+RUN mkdir -p /var/www \
+    && chown -R www:www /var/www
+
 # Copier les fichiers de configuration
 COPY docker/php/local.ini /usr/local/etc/php/conf.d/local.ini
 COPY docker/php/start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
-
-# Copier les fichiers de l'application
-COPY --chown=www:www . /var/www
-
-# Définir les permissions
-RUN chmod -R 755 /var/www/storage \
-    && chmod -R 755 /var/www/bootstrap/cache
 
 # Passer à l'utilisateur www
 USER www
 
 # Définir le répertoire de travail
 WORKDIR /var/www
+
+# Copier les fichiers de l'application (en tant qu'utilisateur www)
+COPY --chown=www:www . .
+
+# Créer les répertoires nécessaires avec les bonnes permissions
+RUN mkdir -p storage bootstrap/cache vendor \
+    && chmod -R 775 storage bootstrap/cache vendor
 
 # Installer les dépendances PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
