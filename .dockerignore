@@ -24,7 +24,7 @@ README.md
 docker-compose.yml
 docker-compose.override.yml
 Dockerfile*
-docker/
+# docker/ - Commenté pour permettre l'accès aux fichiers de config
 
 # Fichiers de sauvegarde
 backups/
