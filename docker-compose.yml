@@ -1,0 +1,144 @@
+version: '3.8'
+
+services:
+  # Service PHP/Laravel
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gesfarm_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - gesfarm_network
+    depends_on:
+      - db
+      - redis
+
+  # Service Nginx
+  nginx:
+    image: nginx:alpine
+    container_name: gesfarm_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/sites/:/etc/nginx/sites-available
+      - ./docker/nginx/ssl/:/etc/nginx/ssl
+    networks:
+      - gesfarm_network
+    depends_on:
+      - app
+
+  # Service MySQL
+  db:
+    image: mysql:8.0
+    container_name: gesfarm_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: gesfarm
+      MYSQL_ROOT_PASSWORD: gesfarm_root_password
+      MYSQL_USER: gesfarm_user
+      MYSQL_PASSWORD: gesfarm_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./database/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - gesfarm_network
+
+  # Service Redis
+  redis:
+    image: redis:7-alpine
+    container_name: gesfarm_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - gesfarm_network
+
+  # Service Mailhog (pour les emails de développement)
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: gesfarm_mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+    networks:
+      - gesfarm_network
+
+  # Service phpMyAdmin (pour la gestion de la base de données)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: gesfarm_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: gesfarm_user
+      PMA_PASSWORD: gesfarm_password
+    ports:
+      - "8080:80"
+    networks:
+      - gesfarm_network
+    depends_on:
+      - db
+
+  # Service Scheduler (pour les tâches cron Laravel)
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gesfarm_scheduler
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - gesfarm_network
+    depends_on:
+      - db
+      - redis
+    command: >
+      sh -c "while true; do
+        php artisan schedule:run
+        sleep 60
+      done"
+
+  # Service Queue Worker (pour les tâches en arrière-plan)
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gesfarm_queue
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - gesfarm_network
+    depends_on:
+      - db
+      - redis
+    command: php artisan queue:work --verbose --tries=3 --timeout=90
+
+networks:
+  gesfarm_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local

@@ -1,0 +1,90 @@
+<?php
+
+return [
+    'title' => 'GESFARM API Documentation',
+    'description' => 'API de gestion d\'une ferme agropastorale avec un accent sur la gestion avicole',
+    'base_url' => null,
+    
+    'routes' => [
+        [
+            'match' => [
+                'prefixes' => ['api/*'],
+                'domains' => ['*'],
+            ],
+            'include' => [],
+            'exclude' => [],
+            'apply' => [
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                ],
+                'response_calls' => [
+                    'only' => [],
+                    'except' => [],
+                    'config' => [
+                        'app.debug' => false,
+                    ],
+                    'headers' => [
+                        'Content-Type' => 'application/json',
+                        'Accept' => 'application/json',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
+    'type' => 'static',
+    'static' => [
+        'output_path' => 'public/docs',
+    ],
+
+    'auth' => [
+        'enabled' => true,
+        'default' => true,
+        'in' => 'bearer',
+        'name' => 'token',
+        'use_value' => env('SCRIBE_AUTH_KEY'),
+        'placeholder' => '{YOUR_AUTH_KEY}',
+        'extra_info' => 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.',
+    ],
+
+    'intro_text' => <<<INTRO
+Cette API vous permet de gérer tous les aspects de votre ferme agropastorale :
+
+- **Gestion des stocks** : Suivi des intrants, aliments, équipements et produits vétérinaires
+- **Élevage avicole** : Gestion des lots, suivi de la ponte, incubation et prophylaxie
+- **Élevage bovin** : Suivi du troupeau, production laitière et santé animale
+- **Gestion des cultures** : Suivi des parcelles, activités culturales et rendements
+- **Cartographie** : Gestion des zones et visualisation spatiale
+- **Tableau de bord** : KPIs et indicateurs de performance
+
+## Authentification
+
+Cette API utilise l'authentification par token Bearer. Incluez votre token dans l'en-tête `Authorization` de toutes vos requêtes :
+
+```
+Authorization: Bearer {YOUR_AUTH_KEY}
+```
+INTRO,
+
+    'example_languages' => [
+        'bash',
+        'javascript',
+        'php',
+    ],
+
+    'postman' => [
+        'enabled' => true,
+    ],
+
+    'openapi' => [
+        'enabled' => true,
+    ],
+
+    'logo' => false,
+    'fractal' => [
+        'serializer' => null,
+    ],
+    'routeMatcher' => \Knuckles\Scribe\Matching\RouteMatcher::class,
+    'database_connections_to_transact' => [config('database.default')],
+];

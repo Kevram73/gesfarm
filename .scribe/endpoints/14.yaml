@@ -1,0 +1,791 @@
+name: 'Gestion Vétérinaire'
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/veterinary/treatments
+    metadata:
+      groupName: 'Gestion Vétérinaire'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Récupérer tous les traitements vétérinaires'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer fZ8E5k14ad6eb3Pvgc6ahVD'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/veterinary/treatments
+    metadata:
+      groupName: 'Gestion Vétérinaire'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Créer un nouveau traitement vétérinaire'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      treatment_type:
+        name: treatment_type
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: kgdgiswbbikpatumiawwvhvv
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      treatment_name:
+        name: treatment_name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: kdviemmjijubgmyyygayu
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: false
+        example: 'Voluptatum expedita officia quam quaerat ad consequuntur.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      treatment_date:
+        name: treatment_date
+        description: 'Must be a valid date.'
+        required: true
+        example: '2025-09-10T19:01:41'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      treatment_time:
+        name: treatment_time
+        description: 'Must be a valid date in the format <code>H:i</code>.'
+        required: false
+        example: '19:01'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      animal_type:
+        name: animal_type
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: ukfinsseyvbrbsdkyisgbu
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      animal_id:
+        name: animal_id
+        description: ''
+        required: false
+        example: 8
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      animal_identifier:
+        name: animal_identifier
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: rfeuud
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      veterinarian_name:
+        name: veterinarian_name
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: kjinor
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      veterinarian_license:
+        name: veterinarian_license
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: yplsyhafspohnjrgpmunsmcn
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      medications:
+        name: medications
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      dosages:
+        name: dosages
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      cost:
+        name: cost
+        description: 'Must be at least 0.'
+        required: false
+        example: 47
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      next_treatment_date:
+        name: next_treatment_date
+        description: 'Must be a valid date. Must be a date after <code>treatment_date</code>.'
+        required: false
+        example: '2054-05-17'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      notes:
+        name: notes
+        description: ''
+        required: false
+        example: neque
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      attachments:
+        name: attachments
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      treatment_type: kgdgiswbbikpatumiawwvhvv
+      treatment_name: kdviemmjijubgmyyygayu
+      description: 'Voluptatum expedita officia quam quaerat ad consequuntur.'
+      treatment_date: '2025-09-10T19:01:41'
+      treatment_time: '19:01'
+      animal_type: ukfinsseyvbrbsdkyisgbu
+      animal_id: 8
+      animal_identifier: rfeuud
+      veterinarian_name: kjinor
+      veterinarian_license: yplsyhafspohnjrgpmunsmcn
+      cost: 47
+      next_treatment_date: '2054-05-17'
+      notes: neque
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer evafa63gk1ZPbc6Vh85EDd4'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/veterinary/treatments/{treatment_id}'
+    metadata:
+      groupName: 'Gestion Vétérinaire'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Récupérer un traitement spécifique'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      treatment_id:
+        name: treatment_id
+        description: 'The ID of the treatment.'
+        required: true
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      treatment_id: 2
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer VgE4d3hZ8kDcve5b66aPf1a'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/veterinary/treatments/{treatment_id}'
+    metadata:
+      groupName: 'Gestion Vétérinaire'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Mettre à jour un traitement'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      treatment_id:
+        name: treatment_id
+        description: 'The ID of the treatment.'
+        required: true
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      treatment_id: 5
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      treatment_type:
+        name: treatment_type
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: vftbdyyqednlrfkvtkilxgpk
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      treatment_name:
+        name: treatment_name
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: fwavkskiqfzuzdxebqdm
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: false
+        example: 'Quam et voluptatibus consectetur cumque.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      treatment_date:
+        name: treatment_date
+        description: 'Must be a valid date.'
+        required: false
+        example: '2025-09-10T19:01:42'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      treatment_time:
+        name: treatment_time
+        description: 'Must be a valid date in the format <code>H:i</code>.'
+        required: false
+        example: '19:01'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      animal_type:
+        name: animal_type
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: kgpxdmoxggdgpxhs
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      animal_id:
+        name: animal_id
+        description: ''
+        required: false
+        example: 9
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      animal_identifier:
+        name: animal_identifier
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: fgjznwbk
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      veterinarian_name:
+        name: veterinarian_name
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: fvvxgixseiziqxhrkni
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      veterinarian_license:
+        name: veterinarian_license
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: tyhg
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      medications:
+        name: medications
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      dosages:
+        name: dosages
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      cost:
+        name: cost
+        description: 'Must be at least 0.'
+        required: false
+        example: 0
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      next_treatment_date:
+        name: next_treatment_date
+        description: 'Must be a valid date. Must be a date after <code>treatment_date</code>.'
+        required: false
+        example: '2040-01-03'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      notes:
+        name: notes
+        description: ''
+        required: false
+        example: unde
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      attachments:
+        name: attachments
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      treatment_type: vftbdyyqednlrfkvtkilxgpk
+      treatment_name: fwavkskiqfzuzdxebqdm
+      description: 'Quam et voluptatibus consectetur cumque.'
+      treatment_date: '2025-09-10T19:01:42'
+      treatment_time: '19:01'
+      animal_type: kgpxdmoxggdgpxhs
+      animal_id: 9
+      animal_identifier: fgjznwbk
+      veterinarian_name: fvvxgixseiziqxhrkni
+      veterinarian_license: tyhg
+      cost: 0
+      next_treatment_date: '2040-01-03'
+      notes: unde
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer eEk31VaDh4f6g56dZPav8bc'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/veterinary/treatments/{treatment_id}'
+    metadata:
+      groupName: 'Gestion Vétérinaire'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Supprimer un traitement'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      treatment_id:
+        name: treatment_id
+        description: 'The ID of the treatment.'
+        required: true
+        example: 10
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      treatment_id: 10
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer vd63hbPfaka4DVE6e18Zgc5'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/veterinary/schedule
+    metadata:
+      groupName: 'Gestion Vétérinaire'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Récupérer le planning des soins'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer fb8VD1aea5d66EgvckPhZ43'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/veterinary/reminders
+    metadata:
+      groupName: 'Gestion Vétérinaire'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Récupérer les rappels de soins'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 8Vf5daEgacP46ehDZkbv631'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/veterinary/animal-history
+    metadata:
+      groupName: 'Gestion Vétérinaire'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Récupérer l'historique médical d'un animal"
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      animal_id:
+        name: animal_id
+        description: ''
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      animal_type:
+        name: animal_type
+        description: ''
+        required: true
+        example: numquam
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      animal_id: 1
+      animal_type: numquam
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer hg84ZEef1vb6c6aDak5dPV3'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/veterinary/stats
+    metadata:
+      groupName: 'Gestion Vétérinaire'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Récupérer les statistiques vétérinaires'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 548g6kZed3b6va1achfDPVE'
+    controller: null
+    method: null
+    route: null
+    custom: []

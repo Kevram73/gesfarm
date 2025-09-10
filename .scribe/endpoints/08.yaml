@@ -1,0 +1,687 @@
+name: 'Crop Management'
+description: |-
+
+  APIs for managing crops and agricultural activities
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/crops
+    metadata:
+      groupName: 'Crop Management'
+      groupDescription: |-
+
+        APIs for managing crops and agricultural activities
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Crops'
+      description: 'Retrieve a paginated list of crops'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      name:
+        name: name
+        description: 'Filter by crop name'
+        required: false
+        example: sit
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      variety:
+        name: variety
+        description: 'Filter by variety'
+        required: false
+        example: esse
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      zone_id:
+        name: zone_id
+        description: 'Filter by zone ID'
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      status:
+        name: status
+        description: 'Filter by status (planted, growing, harvested, failed)'
+        required: false
+        example: saepe
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      search:
+        name: search
+        description: 'Search in name and variety'
+        required: false
+        example: itaque
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      name: sit
+      variety: esse
+      zone_id: 16
+      status: saepe
+      search: itaque
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "data": {
+              "crops": [...],
+              "pagination": {...}
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 15aahP63c68VZbdDE4ekfgv'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/crops
+    metadata:
+      groupName: 'Crop Management'
+      groupDescription: |-
+
+        APIs for managing crops and agricultural activities
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create Crop'
+      description: 'Create a new crop record'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Crop name'
+        required: true
+        example: aut
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      variety:
+        name: variety
+        description: 'Crop variety'
+        required: true
+        example: est
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      zone_id:
+        name: zone_id
+        description: 'Zone ID'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      planting_date:
+        name: planting_date
+        description: 'Planting date'
+        required: true
+        example: sed
+        type: date
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      expected_harvest_date:
+        name: expected_harvest_date
+        description: 'Expected harvest date'
+        required: false
+        example: sit
+        type: date
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      planted_area:
+        name: planted_area
+        description: 'Planted area in square meters'
+        required: true
+        example: voluptatem
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      expected_yield:
+        name: expected_yield
+        description: 'Expected yield in kg'
+        required: false
+        example: consequatur
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      notes:
+        name: notes
+        description: 'Additional notes'
+        required: false
+        example: dicta
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: aut
+      variety: est
+      zone_id: 17
+      planting_date: sed
+      expected_harvest_date: sit
+      planted_area: voluptatem
+      expected_yield: consequatur
+      notes: dicta
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "status": "success",
+            "message": "Crop created successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer EPa1fhD8kbv653ZcaV6d4eg'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/crops/{id}'
+    metadata:
+      groupName: 'Crop Management'
+      groupDescription: |-
+
+        APIs for managing crops and agricultural activities
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Crop Details'
+      description: 'Retrieve a specific crop with its activities'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'Crop ID'
+        required: true
+        example: 7
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 7
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer hZe36P8agvbEVf5D6ka14dc'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/crops/{id}'
+    metadata:
+      groupName: 'Crop Management'
+      groupDescription: |-
+
+        APIs for managing crops and agricultural activities
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update Crop'
+      description: 'Update an existing crop record'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'Crop ID'
+        required: true
+        example: 18
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 18
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Crop name'
+        required: false
+        example: impedit
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      variety:
+        name: variety
+        description: 'Crop variety'
+        required: false
+        example: tempore
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      zone_id:
+        name: zone_id
+        description: 'Zone ID'
+        required: false
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      expected_harvest_date:
+        name: expected_harvest_date
+        description: 'Expected harvest date'
+        required: false
+        example: omnis
+        type: date
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      actual_harvest_date:
+        name: actual_harvest_date
+        description: 'Actual harvest date'
+        required: false
+        example: est
+        type: date
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      planted_area:
+        name: planted_area
+        description: 'Planted area in square meters'
+        required: false
+        example: consequatur
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      expected_yield:
+        name: expected_yield
+        description: 'Expected yield in kg'
+        required: false
+        example: eaque
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      actual_yield:
+        name: actual_yield
+        description: 'Actual yield in kg'
+        required: false
+        example: non
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      status:
+        name: status
+        description: Status
+        required: false
+        example: magnam
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      notes:
+        name: notes
+        description: 'Additional notes'
+        required: false
+        example: tenetur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: impedit
+      variety: tempore
+      zone_id: 5
+      expected_harvest_date: omnis
+      actual_harvest_date: est
+      planted_area: consequatur
+      expected_yield: eaque
+      actual_yield: non
+      status: magnam
+      notes: tenetur
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "message": "Crop updated successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer vEaDkah6g485Vf6cbPdZ1e3'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/crops/activities
+    metadata:
+      groupName: 'Crop Management'
+      groupDescription: |-
+
+        APIs for managing crops and agricultural activities
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Record Crop Activity'
+      description: 'Record an agricultural activity for a crop'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      crop_id:
+        name: crop_id
+        description: 'Crop ID'
+        required: true
+        example: 10
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      activity_type:
+        name: activity_type
+        description: 'Activity type (planting, fertilizing, irrigation, pest_control, harvesting)'
+        required: true
+        example: sint
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      activity_date:
+        name: activity_date
+        description: 'Activity date'
+        required: true
+        example: non
+        type: date
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: 'Activity description'
+        required: true
+        example: 'Tempore soluta consequatur exercitationem.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      materials_used:
+        name: materials_used
+        description: 'Materials used (array of stock items)'
+        required: false
+        example: et
+        type: json
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      cost:
+        name: cost
+        description: 'Activity cost'
+        required: false
+        example: sequi
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      notes:
+        name: notes
+        description: 'Additional notes'
+        required: false
+        example: officia
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      crop_id: 10
+      activity_type: sint
+      activity_date: non
+      description: 'Tempore soluta consequatur exercitationem.'
+      materials_used: et
+      cost: sequi
+      notes: officia
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "status": "success",
+            "message": "Crop activity recorded successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1ZP66DVf4kbaaE85e3gcvdh'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/crops/{id}/activities'
+    metadata:
+      groupName: 'Crop Management'
+      groupDescription: |-
+
+        APIs for managing crops and agricultural activities
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Crop Activities'
+      description: 'Retrieve activities for a specific crop'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'Crop ID'
+        required: true
+        example: 11
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 11
+    queryParameters:
+      activity_type:
+        name: activity_type
+        description: 'Filter by activity type'
+        required: false
+        example: aut
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      start_date:
+        name: start_date
+        description: 'date Filter activities from date'
+        required: false
+        example: distinctio
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      end_date:
+        name: end_date
+        description: 'date Filter activities to date'
+        required: false
+        example: nulla
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      activity_type: aut
+      start_date: distinctio
+      end_date: nulla
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "data": {
+              "activities": [...],
+              "pagination": {...}
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer DaEV1ackd6fh4vg853PZ6eb'
+    controller: null
+    method: null
+    route: null
+    custom: []

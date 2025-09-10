@@ -1,0 +1,504 @@
+name: 'Zone Management'
+description: |-
+
+  APIs for managing farm zones and cartography
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/zones
+    metadata:
+      groupName: 'Zone Management'
+      groupDescription: |-
+
+        APIs for managing farm zones and cartography
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Zones'
+      description: 'Retrieve a paginated list of zones'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      type:
+        name: type
+        description: 'Filter by zone type (cultivation, pasture, enclosure, building, water_point)'
+        required: false
+        example: repellendus
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      status:
+        name: status
+        description: 'Filter by status (active, inactive, maintenance)'
+        required: false
+        example: dolores
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      search:
+        name: search
+        description: 'Search in name and description'
+        required: false
+        example: totam
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      type: repellendus
+      status: dolores
+      search: totam
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "data": {
+              "zones": [...],
+              "pagination": {...}
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 43v15gDEcPZ6hk8b6aaVfed'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/zones
+    metadata:
+      groupName: 'Zone Management'
+      groupDescription: |-
+
+        APIs for managing farm zones and cartography
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create Zone'
+      description: 'Create a new zone'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Zone name'
+        required: true
+        example: est
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: 'Zone description'
+        required: false
+        example: 'Eveniet unde vero et hic quod nisi nostrum illum.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      type:
+        name: type
+        description: 'Zone type (cultivation, pasture, enclosure, building, water_point)'
+        required: true
+        example: voluptatibus
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      coordinates:
+        name: coordinates
+        description: 'GeoJSON coordinates'
+        required: true
+        example: consequatur
+        type: json
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      area:
+        name: area
+        description: 'Zone area in square meters'
+        required: false
+        example: veritatis
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      status:
+        name: status
+        description: 'Zone status (active, inactive, maintenance)'
+        required: false
+        example: est
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: est
+      description: 'Eveniet unde vero et hic quod nisi nostrum illum.'
+      type: voluptatibus
+      coordinates: consequatur
+      area: veritatis
+      status: est
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "status": "success",
+            "message": "Zone created successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer d18EgZh6DaVvfea43P5bkc6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/zones/{id}'
+    metadata:
+      groupName: 'Zone Management'
+      groupDescription: |-
+
+        APIs for managing farm zones and cartography
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Zone Details'
+      description: 'Retrieve a specific zone with its associated data'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'Zone ID'
+        required: true
+        example: 14
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 14
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer cd6kV5Z3avfP68hD1a4Egeb'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/zones/{id}'
+    metadata:
+      groupName: 'Zone Management'
+      groupDescription: |-
+
+        APIs for managing farm zones and cartography
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update Zone'
+      description: 'Update an existing zone'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'Zone ID'
+        required: true
+        example: 12
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 12
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Zone name'
+        required: false
+        example: dolorem
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: 'Zone description'
+        required: false
+        example: 'Ea et assumenda nihil ratione nulla molestiae omnis odit.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      type:
+        name: type
+        description: 'Zone type'
+        required: false
+        example: iusto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      coordinates:
+        name: coordinates
+        description: 'GeoJSON coordinates'
+        required: false
+        example: nobis
+        type: json
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      area:
+        name: area
+        description: 'Zone area in square meters'
+        required: false
+        example: nobis
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      status:
+        name: status
+        description: 'Zone status'
+        required: false
+        example: et
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: dolorem
+      description: 'Ea et assumenda nihil ratione nulla molestiae omnis odit.'
+      type: iusto
+      coordinates: nobis
+      area: nobis
+      status: et
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "message": "Zone updated successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer PfEVa435cZdk86bve6g1Dha'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/zones/{id}'
+    metadata:
+      groupName: 'Zone Management'
+      groupDescription: |-
+
+        APIs for managing farm zones and cartography
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete Zone'
+      description: 'Delete a zone'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'Zone ID'
+        required: true
+        example: 13
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 13
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "message": "Zone deleted successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer E4h6f1gkPvD6caaVd8Z53be'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/zones/{id}/statistics'
+    metadata:
+      groupName: 'Zone Management'
+      groupDescription: |-
+
+        APIs for managing farm zones and cartography
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Zone Statistics'
+      description: 'Get statistics for a specific zone'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'Zone ID'
+        required: true
+        example: 6
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 6
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "data": {
+              "zone": {...},
+              "statistics": {
+                "poultry_count": 0,
+                "cattle_count": 0,
+                "crops_count": 0,
+                "active_tasks": 0
+              }
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer va5ZDd6abP3egEh86fc14kV'
+    controller: null
+    method: null
+    route: null
+    custom: []

@@ -1,0 +1,4172 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "GESFARM API Documentation",
+        "_postman_id": "89869366-e3a0-43a2-bc8c-6b0f4132850d",
+        "description": "API de gestion d'une ferme agropastorale avec un accent sur la gestion avicole",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Analytics",
+            "description": "",
+            "item": [
+                {
+                    "name": "Analytics avanc\u00e9s pour la volaille",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/analytics\/poultry",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/analytics\/poultry"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Analytics avanc\u00e9s pour le b\u00e9tail",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/analytics\/cattle",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/analytics\/cattle"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Analytics avanc\u00e9s pour les cultures",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/analytics\/crops",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/analytics\/crops"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Vue d'ensemble de la ferme",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/analytics\/farm-overview",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/analytics\/farm-overview"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Authentication",
+            "description": "\nAPIs for user authentication and management",
+            "item": [
+                {
+                    "name": "Login",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"gosinski@example.org\",\"password\":\"HX7>~H\\\\~cu4f\"}"
+                        },
+                        "description": "Authenticate user and return access token"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Login successful\",\n  \"data\": {\n    \"user\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"john@example.com\",\n      \"roles\": [\"admin\"]\n    },\n    \"token\": \"1|abc123...\"\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"status\": \"error\",\n  \"message\": \"Invalid credentials\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Logout",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/logout",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/logout"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Revoke the current access token"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Logout successful\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get User Profile",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/profile",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/profile"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get the authenticated user's profile information"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"user\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"john@example.com\",\n      \"roles\": [\"admin\"],\n      \"permissions\": [\"create-users\", \"view-stock\"]\n    }\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cattle Management",
+            "description": "\nAPIs for managing cattle and their records",
+            "item": [
+                {
+                    "name": "Get Cattle",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cattle",
+                            "query": [
+                                {
+                                    "key": "breed",
+                                    "value": "inventore",
+                                    "description": "Filter by breed",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "gender",
+                                    "value": "est",
+                                    "description": "Filter by gender (male, female)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "accusantium",
+                                    "description": "Filter by status (active, sold, deceased)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "zone_id",
+                                    "value": "16",
+                                    "description": "Filter by zone ID",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "search",
+                                    "value": "vitae",
+                                    "description": "Search in tag number and name",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/cattle?breed=inventore&gender=est&status=accusantium&zone_id=16&search=vitae"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a paginated list of cattle"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"cattle\": [...],\n    \"pagination\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Cattle",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cattle",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/cattle"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"tag_number\":\"mollitia\",\"name\":\"amet\",\"breed\":\"qui\",\"gender\":\"eum\",\"birth_date\":\"sit\",\"mother_tag\":\"quos\",\"father_tag\":\"perspiciatis\",\"current_weight\":\"inventore\",\"zone_id\":7,\"notes\":\"quas\"}"
+                        },
+                        "description": "Create a new cattle record"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Cattle created successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Cattle Details",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cattle\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/cattle\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "5",
+                                    "description": "Cattle ID"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a specific cattle with its records"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Cattle",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cattle\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/cattle\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "6",
+                                    "description": "Cattle ID"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"tag_number\":\"sequi\",\"name\":\"pariatur\",\"breed\":\"vel\",\"gender\":\"repudiandae\",\"current_weight\":\"atque\",\"zone_id\":10,\"status\":\"atque\",\"notes\":\"perferendis\"}"
+                        },
+                        "description": "Update an existing cattle record"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Cattle updated successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Record Cattle Data",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cattle\/records",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/cattle\/records"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"cattle_id\":20,\"record_date\":\"neque\",\"milk_production\":\"alias\",\"weight\":\"repudiandae\",\"health_status\":\"quaerat\",\"health_notes\":\"molestias\",\"feeding_notes\":\"et\",\"observations\":\"maxime\"}"
+                        },
+                        "description": "Record daily cattle data (milk production, weight, health, etc.)"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Cattle record created successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Crop Management",
+            "description": "\nAPIs for managing crops and agricultural activities",
+            "item": [
+                {
+                    "name": "Get Crops",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/crops",
+                            "query": [
+                                {
+                                    "key": "name",
+                                    "value": "sit",
+                                    "description": "Filter by crop name",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "variety",
+                                    "value": "esse",
+                                    "description": "Filter by variety",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "zone_id",
+                                    "value": "16",
+                                    "description": "Filter by zone ID",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "saepe",
+                                    "description": "Filter by status (planted, growing, harvested, failed)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "search",
+                                    "value": "itaque",
+                                    "description": "Search in name and variety",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/crops?name=sit&variety=esse&zone_id=16&status=saepe&search=itaque"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a paginated list of crops"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"crops\": [...],\n    \"pagination\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Crop",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/crops",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/crops"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"aut\",\"variety\":\"est\",\"zone_id\":17,\"planting_date\":\"sed\",\"expected_harvest_date\":\"sit\",\"planted_area\":\"voluptatem\",\"expected_yield\":\"consequatur\",\"notes\":\"dicta\"}"
+                        },
+                        "description": "Create a new crop record"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Crop created successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Crop Details",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/crops\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/crops\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "7",
+                                    "description": "Crop ID"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a specific crop with its activities"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Crop",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/crops\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/crops\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "18",
+                                    "description": "Crop ID"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"impedit\",\"variety\":\"tempore\",\"zone_id\":5,\"expected_harvest_date\":\"omnis\",\"actual_harvest_date\":\"est\",\"planted_area\":\"consequatur\",\"expected_yield\":\"eaque\",\"actual_yield\":\"non\",\"status\":\"magnam\",\"notes\":\"tenetur\"}"
+                        },
+                        "description": "Update an existing crop record"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Crop updated successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Record Crop Activity",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/crops\/activities",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/crops\/activities"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"crop_id\":10,\"activity_type\":\"sint\",\"activity_date\":\"non\",\"description\":\"Tempore soluta consequatur exercitationem.\",\"materials_used\":\"et\",\"cost\":\"sequi\",\"notes\":\"officia\"}"
+                        },
+                        "description": "Record an agricultural activity for a crop"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Crop activity recorded successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Crop Activities",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/crops\/:id\/activities",
+                            "query": [
+                                {
+                                    "key": "activity_type",
+                                    "value": "aut",
+                                    "description": "Filter by activity type",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "start_date",
+                                    "value": "distinctio",
+                                    "description": "date Filter activities from date",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "nulla",
+                                    "description": "date Filter activities to date",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/crops\/:id\/activities?activity_type=aut&start_date=distinctio&end_date=nulla",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "11",
+                                    "description": "Crop ID"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve activities for a specific crop"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"activities\": [...],\n    \"pagination\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Dashboard",
+            "description": "\nAPIs for dashboard data and KPIs",
+            "item": [
+                {
+                    "name": "Get Dashboard Data",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/dashboard",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/dashboard"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve key performance indicators and summary data"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"kpis\": {\n      \"stock_alerts\": {...},\n      \"poultry_stats\": {...},\n      \"cattle_stats\": {...},\n      \"crop_stats\": {...},\n      \"tasks\": {...}\n    },\n    \"recent_activities\": [...]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Stock Alerts",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/dashboard\/stock-alerts",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/dashboard\/stock-alerts"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get stock items with low stock or expired items"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"low_stock\": [...],\n    \"expired_items\": [...],\n    \"expiring_soon\": [...]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Poultry Statistics",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/dashboard\/poultry-stats",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/dashboard\/poultry-stats"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get poultry performance statistics"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"total_flocks\": 0,\n    \"total_birds\": 0,\n    \"average_mortality_rate\": 0,\n    \"daily_egg_production\": 0,\n    \"feed_consumption\": 0\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Cattle Statistics",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/dashboard\/cattle-stats",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/dashboard\/cattle-stats"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get cattle performance statistics"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"total_cattle\": 0,\n    \"milk_production_today\": 0,\n    \"average_weight\": 0,\n    \"health_status\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Crop Statistics",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/dashboard\/crop-stats",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/dashboard\/crop-stats"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get crop performance statistics"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"total_crops\": 0,\n    \"harvested_crops\": 0,\n    \"average_yield_per_sqm\": 0,\n    \"upcoming_harvests\": 0\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Task Statistics",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/dashboard\/task-stats",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/dashboard\/task-stats"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get task management statistics"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"pending_tasks\": 0,\n    \"overdue_tasks\": 0,\n    \"completed_today\": 0,\n    \"tasks_by_priority\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "GET api\/notifications",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/notifications",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/notifications"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/notifications\/unread",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/notifications\/unread",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/notifications\/unread"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "POST api\/notifications",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/notifications",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/notifications"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"type\":\"jkxdrykrzsttntszwna\",\"title\":\"zzykjlrnqpglfon\",\"message\":\"nihil\",\"priority\":\"medium\",\"related_entity_id\":11,\"related_entity_type\":\"hrm\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "PUT api\/notifications\/{notification_id}\/read",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/notifications\/:notification_id\/read",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/notifications\/:notification_id\/read",
+                            "variable": [
+                                {
+                                    "id": "notification_id",
+                                    "key": "notification_id",
+                                    "value": "17",
+                                    "description": "The ID of the notification."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "PUT api\/notifications\/mark-all-read",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/notifications\/mark-all-read",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/notifications\/mark-all-read"
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "DELETE api\/notifications\/{notification_id}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/notifications\/:notification_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/notifications\/:notification_id",
+                            "variable": [
+                                {
+                                    "id": "notification_id",
+                                    "key": "notification_id",
+                                    "value": "5",
+                                    "description": "The ID of the notification."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Gestion Financi\u00e8re",
+            "description": "",
+            "item": [
+                {
+                    "name": "R\u00e9cup\u00e9rer toutes les transactions",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/financial\/transactions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/financial\/transactions"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Cr\u00e9er une nouvelle transaction",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/financial\/transactions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/financial\/transactions"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"type\":\"income\",\"category\":\"u\",\"description\":\"Non consectetur quisquam animi officia commodi dolorem doloremque.\",\"amount\":86,\"currency\":\"d\",\"transaction_date\":\"2025-09-10T19:01:41\",\"payment_method\":\"dty\",\"reference\":\"qfdcrbtlelmhkwbn\",\"notes\":\"sit\",\"related_entity_id\":20,\"related_entity_type\":\"jnavhgggdu\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "R\u00e9cup\u00e9rer une transaction sp\u00e9cifique",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/financial\/transactions\/:transaction_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/financial\/transactions\/:transaction_id",
+                            "variable": [
+                                {
+                                    "id": "transaction_id",
+                                    "key": "transaction_id",
+                                    "value": "4",
+                                    "description": "The ID of the transaction."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Mettre \u00e0 jour une transaction",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/financial\/transactions\/:transaction_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/financial\/transactions\/:transaction_id",
+                            "variable": [
+                                {
+                                    "id": "transaction_id",
+                                    "key": "transaction_id",
+                                    "value": "1",
+                                    "description": "The ID of the transaction."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"type\":\"income\",\"category\":\"wdhfk\",\"description\":\"Sit voluptas sunt ratione saepe aut ipsa iste non.\",\"amount\":66,\"currency\":\"dd\",\"transaction_date\":\"2025-09-10T19:01:41\",\"payment_method\":\"yzheksqjforqksihmuvkrbjn\",\"reference\":\"kgeglrpffqgasayj\",\"notes\":\"voluptatem\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Supprimer une transaction",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/financial\/transactions\/:transaction_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/financial\/transactions\/:transaction_id",
+                            "variable": [
+                                {
+                                    "id": "transaction_id",
+                                    "key": "transaction_id",
+                                    "value": "16",
+                                    "description": "The ID of the transaction."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "R\u00e9cup\u00e9rer tous les budgets",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/financial\/budgets",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/financial\/budgets"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Cr\u00e9er un nouveau budget",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/financial\/budgets",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/financial\/budgets"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"zkdoziqphvvgc\",\"description\":\"Occaecati aut libero eligendi.\",\"category\":\"yvgh\",\"allocated_amount\":81,\"currency\":\"cri\",\"start_date\":\"2025-09-10T19:01:41\",\"end_date\":\"2046-06-07\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "R\u00e9cup\u00e9rer les rapports financiers",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/financial\/reports",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/financial\/reports"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Gestion V\u00e9t\u00e9rinaire",
+            "description": "",
+            "item": [
+                {
+                    "name": "R\u00e9cup\u00e9rer tous les traitements v\u00e9t\u00e9rinaires",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/veterinary\/treatments",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/veterinary\/treatments"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Cr\u00e9er un nouveau traitement v\u00e9t\u00e9rinaire",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/veterinary\/treatments",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/veterinary\/treatments"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"treatment_type\":\"kgdgiswbbikpatumiawwvhvv\",\"treatment_name\":\"kdviemmjijubgmyyygayu\",\"description\":\"Voluptatum expedita officia quam quaerat ad consequuntur.\",\"treatment_date\":\"2025-09-10T19:01:41\",\"treatment_time\":\"19:01\",\"animal_type\":\"ukfinsseyvbrbsdkyisgbu\",\"animal_id\":8,\"animal_identifier\":\"rfeuud\",\"veterinarian_name\":\"kjinor\",\"veterinarian_license\":\"yplsyhafspohnjrgpmunsmcn\",\"cost\":47,\"next_treatment_date\":\"2054-05-17\",\"notes\":\"neque\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "R\u00e9cup\u00e9rer un traitement sp\u00e9cifique",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/veterinary\/treatments\/:treatment_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/veterinary\/treatments\/:treatment_id",
+                            "variable": [
+                                {
+                                    "id": "treatment_id",
+                                    "key": "treatment_id",
+                                    "value": "2",
+                                    "description": "The ID of the treatment."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Mettre \u00e0 jour un traitement",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/veterinary\/treatments\/:treatment_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/veterinary\/treatments\/:treatment_id",
+                            "variable": [
+                                {
+                                    "id": "treatment_id",
+                                    "key": "treatment_id",
+                                    "value": "5",
+                                    "description": "The ID of the treatment."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"treatment_type\":\"vftbdyyqednlrfkvtkilxgpk\",\"treatment_name\":\"fwavkskiqfzuzdxebqdm\",\"description\":\"Quam et voluptatibus consectetur cumque.\",\"treatment_date\":\"2025-09-10T19:01:42\",\"treatment_time\":\"19:01\",\"animal_type\":\"kgpxdmoxggdgpxhs\",\"animal_id\":9,\"animal_identifier\":\"fgjznwbk\",\"veterinarian_name\":\"fvvxgixseiziqxhrkni\",\"veterinarian_license\":\"tyhg\",\"cost\":0,\"next_treatment_date\":\"2040-01-03\",\"notes\":\"unde\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Supprimer un traitement",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/veterinary\/treatments\/:treatment_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/veterinary\/treatments\/:treatment_id",
+                            "variable": [
+                                {
+                                    "id": "treatment_id",
+                                    "key": "treatment_id",
+                                    "value": "10",
+                                    "description": "The ID of the treatment."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "R\u00e9cup\u00e9rer le planning des soins",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/veterinary\/schedule",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/veterinary\/schedule"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "R\u00e9cup\u00e9rer les rappels de soins",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/veterinary\/reminders",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/veterinary\/reminders"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "R\u00e9cup\u00e9rer l'historique m\u00e9dical d'un animal",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/veterinary\/animal-history",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/veterinary\/animal-history"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"animal_id\":1,\"animal_type\":\"numquam\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "R\u00e9cup\u00e9rer les statistiques v\u00e9t\u00e9rinaires",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/veterinary\/stats",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/veterinary\/stats"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Health Check",
+            "description": "\nAPIs for system health monitoring",
+            "item": [
+                {
+                    "name": "Health Check",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/health",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/health"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Check the health status of the API and database"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"healthy\",\n  \"timestamp\": \"2024-01-20T10:30:00Z\",\n  \"services\": {\n    \"database\": \"connected\",\n    \"cache\": \"connected\"\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "System Info",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/info",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/info"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get system information and statistics"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"version\": \"1.0.0\",\n    \"environment\": \"production\",\n    \"php_version\": \"8.1.0\",\n    \"laravel_version\": \"10.0.0\",\n    \"database_size\": \"15.2 MB\",\n    \"total_users\": 5,\n    \"total_records\": 1250\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Poultry Management",
+            "description": "\nAPIs for managing poultry flocks, records, and incubation",
+            "item": [
+                {
+                    "name": "Get Poultry Flocks",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/poultry\/flocks",
+                            "query": [
+                                {
+                                    "key": "type",
+                                    "value": "saepe",
+                                    "description": "Filter by flock type (layer, broiler, duck, turkey)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "qui",
+                                    "description": "Filter by status (active, sold, deceased)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "zone_id",
+                                    "value": "1",
+                                    "description": "Filter by zone ID",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "search",
+                                    "value": "tempora",
+                                    "description": "Search in flock number and breed",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/poultry\/flocks?type=saepe&status=qui&zone_id=1&search=tempora"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a paginated list of poultry flocks"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"flocks\": [...],\n    \"pagination\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Poultry Flock",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/poultry\/flocks",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/poultry\/flocks"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"flock_number\":\"in\",\"type\":\"soluta\",\"breed\":\"reprehenderit\",\"initial_quantity\":3,\"arrival_date\":\"et\",\"zone_id\":1,\"notes\":\"quasi\"}"
+                        },
+                        "description": "Create a new poultry flock"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Poultry flock created successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Poultry Flock",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/poultry\/flocks\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/poultry\/flocks\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "Flock ID"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a specific poultry flock with its records"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Poultry Flock",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/poultry\/flocks\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/poultry\/flocks\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "Flock ID"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"flock_number\":\"ratione\",\"type\":\"error\",\"breed\":\"placeat\",\"current_quantity\":15,\"zone_id\":13,\"status\":\"esse\",\"notes\":\"porro\"}"
+                        },
+                        "description": "Update an existing poultry flock"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Poultry flock updated successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Record Poultry Data",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/poultry\/records",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/poultry\/records"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"flock_id\":16,\"record_date\":\"maiores\",\"eggs_collected\":11,\"feed_consumed\":\"ducimus\",\"mortality_count\":16,\"average_weight\":\"temporibus\",\"health_notes\":\"cum\",\"observations\":\"aut\"}"
+                        },
+                        "description": "Record daily poultry data (eggs, feed, mortality, etc.)"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Poultry record created successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Incubation Records",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/poultry\/incubation",
+                            "query": [
+                                {
+                                    "key": "egg_type",
+                                    "value": "delectus",
+                                    "description": "Filter by egg type",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "breed",
+                                    "value": "et",
+                                    "description": "Filter by breed",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "start_date",
+                                    "value": "quisquam",
+                                    "description": "date Filter by start date",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/poultry\/incubation?egg_type=delectus&breed=et&start_date=quisquam"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve incubation records"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"records\": [...],\n    \"pagination\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Incubation Record",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/poultry\/incubation",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/poultry\/incubation"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"batch_number\":\"minima\",\"egg_type\":\"corporis\",\"breed\":\"eos\",\"egg_count\":12,\"start_date\":\"aspernatur\",\"incubation_days\":3,\"temperature\":\"dolorem\",\"humidity_percentage\":\"debitis\",\"egg_size\":\"soluta\",\"notes\":\"incidunt\"}"
+                        },
+                        "description": "Create a new incubation record"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Incubation record created successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Incubation Results",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/poultry\/incubation\/:id\/results",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/poultry\/incubation\/:id\/results",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "3",
+                                    "description": "Incubation record ID"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"hatched_count\":4,\"unhatched_count\":10,\"notes\":\"quae\"}"
+                        },
+                        "description": "Update incubation record with hatching results"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Incubation results updated successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Reports",
+            "description": "\nAPIs for generating reports and analytics",
+            "item": [
+                {
+                    "name": "Get Poultry Production Report",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/reports\/poultry-production",
+                            "query": [
+                                {
+                                    "key": "start_date",
+                                    "value": "omnis",
+                                    "description": "date Start date",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "pariatur",
+                                    "description": "date End date",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "flock_id",
+                                    "value": "13",
+                                    "description": "Filter by flock ID",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/reports\/poultry-production?start_date=omnis&end_date=pariatur&flock_id=13"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"start_date\":\"2025-09-10T19:01:40\",\"end_date\":\"2031-08-21\"}"
+                        },
+                        "description": "Generate poultry production report for a date range"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"summary\": {...},\n    \"daily_data\": [...],\n    \"flock_performance\": [...]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Cattle Production Report",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/reports\/cattle-production",
+                            "query": [
+                                {
+                                    "key": "start_date",
+                                    "value": "doloremque",
+                                    "description": "date Start date",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "culpa",
+                                    "description": "date End date",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "cattle_id",
+                                    "value": "3",
+                                    "description": "Filter by cattle ID",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/reports\/cattle-production?start_date=doloremque&end_date=culpa&cattle_id=3"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"start_date\":\"2025-09-10T19:01:40\",\"end_date\":\"2042-11-26\"}"
+                        },
+                        "description": "Generate cattle production report for a date range"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"summary\": {...},\n    \"daily_data\": [...],\n    \"cattle_performance\": [...]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Stock Movement Report",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/reports\/stock-movements",
+                            "query": [
+                                {
+                                    "key": "start_date",
+                                    "value": "occaecati",
+                                    "description": "date Start date",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "id",
+                                    "description": "date End date",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "category_id",
+                                    "value": "13",
+                                    "description": "Filter by category ID",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "type",
+                                    "value": "animi",
+                                    "description": "Filter by movement type (in, out, adjustment)",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/reports\/stock-movements?start_date=occaecati&end_date=id&category_id=13&type=animi"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"start_date\":\"2025-09-10T19:01:40\",\"end_date\":\"2079-12-28\",\"type\":\"in\"}"
+                        },
+                        "description": "Generate stock movement report for a date range"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"summary\": {...},\n    \"movements\": [...],\n    \"category_breakdown\": [...]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Crop Performance Report",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/reports\/crop-performance",
+                            "query": [
+                                {
+                                    "key": "year",
+                                    "value": "13",
+                                    "description": "Filter by year",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "crop_name",
+                                    "value": "laboriosam",
+                                    "description": "Filter by crop name",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/reports\/crop-performance?year=13&crop_name=laboriosam"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Generate crop performance report"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"summary\": {...},\n    \"crop_performance\": [...],\n    \"activities_summary\": [...]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Financial Summary Report",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/reports\/financial-summary",
+                            "query": [
+                                {
+                                    "key": "start_date",
+                                    "value": "rem",
+                                    "description": "date Start date",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "aut",
+                                    "description": "date End date",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/reports\/financial-summary?start_date=rem&end_date=aut"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"start_date\":\"2025-09-10T19:01:40\",\"end_date\":\"2073-07-05\"}"
+                        },
+                        "description": "Generate financial summary report"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"revenue\": {...},\n    \"expenses\": {...},\n    \"profit_loss\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Stock Categories",
+            "description": "\nAPIs for managing stock categories",
+            "item": [
+                {
+                    "name": "Get Stock Categories",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/stock\/categories",
+                            "query": [
+                                {
+                                    "key": "type",
+                                    "value": "adipisci",
+                                    "description": "Filter by category type",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "search",
+                                    "value": "deserunt",
+                                    "description": "Search in name and description",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/stock\/categories?type=adipisci&search=deserunt"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a list of stock categories"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": [...]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Stock Category",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/stock\/categories",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/stock\/categories"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"iure\",\"description\":\"Asperiores nihil quisquam asperiores eos tempora.\",\"type\":\"quo\"}"
+                        },
+                        "description": "Create a new stock category"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Stock category created successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Stock Category Details",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/stock\/categories\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/stock\/categories\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "11",
+                                    "description": "Category ID"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a specific stock category with its items"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Stock Category",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/stock\/categories\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/stock\/categories\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "8",
+                                    "description": "Category ID"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"laborum\",\"description\":\"Officia mollitia ad dolorum velit consequatur.\",\"type\":\"quae\"}"
+                        },
+                        "description": "Update an existing stock category"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Stock category updated successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete Stock Category",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/stock\/categories\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/stock\/categories\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "14",
+                                    "description": "Category ID"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Delete a stock category"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Stock category deleted successfully\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Stock Management",
+            "description": "\nAPIs for managing stock items and movements",
+            "item": [
+                {
+                    "name": "Get Stock Items",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/stock\/items",
+                            "query": [
+                                {
+                                    "key": "category_id",
+                                    "value": "1",
+                                    "description": "Filter by category ID",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "type",
+                                    "value": "ex",
+                                    "description": "Filter by item type",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "search",
+                                    "value": "ipsum",
+                                    "description": "Search in name and description",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "low_stock",
+                                    "value": "",
+                                    "description": "Filter items with low stock",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "expired",
+                                    "value": "",
+                                    "description": "Filter expired items",
+                                    "disabled": true
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/stock\/items?category_id=1&type=ex&search=ipsum&low_stock=&expired="
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a paginated list of stock items with optional filtering"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"items\": [...],\n    \"pagination\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Stock Item",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/stock\/items",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/stock\/items"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"ea\",\"description\":\"Cumque debitis voluptates deserunt eaque.\",\"sku\":\"voluptas\",\"category_id\":8,\"unit\":\"corrupti\",\"current_quantity\":\"quis\",\"minimum_quantity\":\"commodi\",\"unit_cost\":\"alias\",\"expiry_date\":\"impedit\",\"supplier\":\"doloribus\",\"notes\":\"rerum\"}"
+                        },
+                        "description": "Create a new stock item"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Stock item created successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Stock Item",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/stock\/items\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/stock\/items\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "9",
+                                    "description": "Stock item ID"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a specific stock item with its movements"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Stock Item",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/stock\/items\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/stock\/items\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "7",
+                                    "description": "Stock item ID"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"sed\",\"description\":\"Maiores aut veritatis voluptate harum.\",\"sku\":\"et\",\"category_id\":3,\"unit\":\"ipsam\",\"minimum_quantity\":\"exercitationem\",\"unit_cost\":\"et\",\"expiry_date\":\"facere\",\"supplier\":\"earum\",\"notes\":\"aperiam\"}"
+                        },
+                        "description": "Update an existing stock item"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Stock item updated successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete Stock Item",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/stock\/items\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/stock\/items\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "19",
+                                    "description": "Stock item ID"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Delete a stock item"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Stock item deleted successfully\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Record Stock Movement",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/stock\/movements",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/stock\/movements"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"stock_item_id\":19,\"type\":\"quo\",\"quantity\":\"aut\",\"unit_cost\":\"et\",\"reason\":\"ex\",\"movement_date\":\"voluptatem\",\"notes\":\"quo\"}"
+                        },
+                        "description": "Record a stock movement (in\/out\/adjustment)"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Stock movement recorded successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Task Management",
+            "description": "\nAPIs for managing tasks and work assignments",
+            "item": [
+                {
+                    "name": "Get Tasks",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/tasks",
+                            "query": [
+                                {
+                                    "key": "type",
+                                    "value": "itaque",
+                                    "description": "Filter by task type (agricultural, livestock, maintenance, administrative)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "ipsa",
+                                    "description": "Filter by status (pending, in_progress, completed, cancelled)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "priority",
+                                    "value": "laudantium",
+                                    "description": "Filter by priority (low, medium, high, urgent)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "assigned_to",
+                                    "value": "3",
+                                    "description": "Filter by assigned user ID",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "zone_id",
+                                    "value": "15",
+                                    "description": "Filter by zone ID",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "search",
+                                    "value": "et",
+                                    "description": "Search in title and description",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/tasks?type=itaque&status=ipsa&priority=laudantium&assigned_to=3&zone_id=15&search=et"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a paginated list of tasks"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"tasks\": [...],\n    \"pagination\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Task",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/tasks",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/tasks"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"title\":\"error\",\"description\":\"Unde eum est rerum velit qui et.\",\"type\":\"laudantium\",\"priority\":\"voluptatem\",\"due_date\":\"autem\",\"assigned_to\":10,\"zone_id\":7,\"notes\":\"perferendis\"}"
+                        },
+                        "description": "Create a new task"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Task created successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Task Details",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/tasks\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/tasks\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "20",
+                                    "description": "Task ID"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a specific task"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Task",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/tasks\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/tasks\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "4",
+                                    "description": "Task ID"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"title\":\"similique\",\"description\":\"Voluptatem consectetur et ut quae reprehenderit accusamus explicabo.\",\"type\":\"illum\",\"priority\":\"velit\",\"status\":\"exercitationem\",\"due_date\":\"at\",\"assigned_to\":1,\"zone_id\":19,\"notes\":\"ipsa\"}"
+                        },
+                        "description": "Update an existing task"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Task updated successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete Task",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/tasks\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/tasks\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "7",
+                                    "description": "Task ID"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Delete a task"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Task deleted successfully\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get My Tasks",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/my-tasks",
+                            "query": [
+                                {
+                                    "key": "status",
+                                    "value": "incidunt",
+                                    "description": "Filter by status",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "type",
+                                    "value": "fugit",
+                                    "description": "Filter by type",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "overdue",
+                                    "value": "",
+                                    "description": "Filter overdue tasks",
+                                    "disabled": true
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/my-tasks?status=incidunt&type=fugit&overdue="
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get tasks assigned to the authenticated user"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"tasks\": [...],\n    \"pagination\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Complete Task",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/tasks\/:id\/complete",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/tasks\/:id\/complete",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "12",
+                                    "description": "Task ID"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"notes\":\"aliquam\"}"
+                        },
+                        "description": "Mark a task as completed"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Task completed successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "User Management",
+            "description": "\nAPIs for managing users and roles",
+            "item": [
+                {
+                    "name": "Get Users",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users",
+                            "query": [
+                                {
+                                    "key": "search",
+                                    "value": "quo",
+                                    "description": "Search in name and email",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "role",
+                                    "value": "minus",
+                                    "description": "Filter by role",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/users?search=quo&role=minus"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a paginated list of users"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"users\": [...],\n    \"pagination\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create User",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"qui\",\"email\":\"genoveva64@example.org\",\"password\":\"~ob))p8_W_kP2S?U\",\"roles\":[\"voluptatum\"]}"
+                        },
+                        "description": "Create a new user"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"User created successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get User Details",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "7",
+                                    "description": "User ID"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a specific user"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update User",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "18",
+                                    "description": "User ID"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"cumque\",\"email\":\"wbarton@example.net\",\"password\":\"07*9\\\/t{'\",\"roles\":[\"fugiat\"]}"
+                        },
+                        "description": "Update an existing user"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"User updated successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete User",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "3",
+                                    "description": "User ID"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Delete a user"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"User deleted successfully\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Available Roles",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/roles",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/roles"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get all available roles"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": [...]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Available Permissions",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/permissions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/permissions"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get all available permissions"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": [...]\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Zone Management",
+            "description": "\nAPIs for managing farm zones and cartography",
+            "item": [
+                {
+                    "name": "Get Zones",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/zones",
+                            "query": [
+                                {
+                                    "key": "type",
+                                    "value": "repellendus",
+                                    "description": "Filter by zone type (cultivation, pasture, enclosure, building, water_point)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "dolores",
+                                    "description": "Filter by status (active, inactive, maintenance)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "search",
+                                    "value": "totam",
+                                    "description": "Search in name and description",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/zones?type=repellendus&status=dolores&search=totam"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a paginated list of zones"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"zones\": [...],\n    \"pagination\": {...}\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Zone",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/zones",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/zones"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"est\",\"description\":\"Eveniet unde vero et hic quod nisi nostrum illum.\",\"type\":\"voluptatibus\",\"coordinates\":\"consequatur\",\"area\":\"veritatis\",\"status\":\"est\"}"
+                        },
+                        "description": "Create a new zone"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Zone created successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Zone Details",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/zones\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/zones\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "14",
+                                    "description": "Zone ID"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve a specific zone with its associated data"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Zone",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/zones\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/zones\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "12",
+                                    "description": "Zone ID"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"dolorem\",\"description\":\"Ea et assumenda nihil ratione nulla molestiae omnis odit.\",\"type\":\"iusto\",\"coordinates\":\"nobis\",\"area\":\"nobis\",\"status\":\"et\"}"
+                        },
+                        "description": "Update an existing zone"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Zone updated successfully\",\n  \"data\": {...}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete Zone",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/zones\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/zones\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "13",
+                                    "description": "Zone ID"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Delete a zone"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Zone deleted successfully\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Zone Statistics",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/zones\/:id\/statistics",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/zones\/:id\/statistics",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "6",
+                                    "description": "Zone ID"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get statistics for a specific zone"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"zone\": {...},\n    \"statistics\": {\n      \"poultry_count\": 0,\n      \"cattle_count\": 0,\n      \"crops_count\": 0,\n      \"active_tasks\": 0\n    }\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "token",
+                "type": "string"
+            }
+        ]
+    }
+}

@@ -1,0 +1,4251 @@
+openapi: 3.0.3
+info:
+  title: 'GESFARM API Documentation'
+  description: "API de gestion d'une ferme agropastorale avec un accent sur la gestion avicole"
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/analytics/poultry:
+    get:
+      summary: 'Analytics avancés pour la volaille'
+      operationId: analyticsAvancsPourLaVolaille
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Analytics
+  /api/analytics/cattle:
+    get:
+      summary: 'Analytics avancés pour le bétail'
+      operationId: analyticsAvancsPourLeBtail
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Analytics
+  /api/analytics/crops:
+    get:
+      summary: 'Analytics avancés pour les cultures'
+      operationId: analyticsAvancsPourLesCultures
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Analytics
+  /api/analytics/farm-overview:
+    get:
+      summary: "Vue d'ensemble de la ferme"
+      operationId: vueDensembleDeLaFerme
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Analytics
+  /api/login:
+    post:
+      summary: Login
+      operationId: login
+      description: 'Authenticate user and return access token'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Login successful'
+                  data:
+                    user:
+                      id: 1
+                      name: 'John Doe'
+                      email: john@example.com
+                      roles:
+                        - admin
+                    token: 1|abc123...
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Login successful'
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 1
+                          name:
+                            type: string
+                            example: 'John Doe'
+                          email:
+                            type: string
+                            example: john@example.com
+                          roles:
+                            type: array
+                            example:
+                              - admin
+                            items:
+                              type: string
+                      token:
+                        type: string
+                        example: 1|abc123...
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Invalid credentials'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Invalid credentials'
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'User email address'
+                  example: gosinski@example.org
+                  nullable: false
+                password:
+                  type: string
+                  description: 'User password'
+                  example: HX7>~H\~cu4f
+                  nullable: false
+              required:
+                - email
+                - password
+  /api/logout:
+    post:
+      summary: Logout
+      operationId: logout
+      description: 'Revoke the current access token'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Logout successful'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Logout successful'
+      tags:
+        - Authentication
+  /api/profile:
+    get:
+      summary: 'Get User Profile'
+      operationId: getUserProfile
+      description: "Get the authenticated user's profile information"
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  data:
+                    user:
+                      id: 1
+                      name: 'John Doe'
+                      email: john@example.com
+                      roles:
+                        - admin
+                      permissions:
+                        - create-users
+                        - view-stock
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 1
+                          name:
+                            type: string
+                            example: 'John Doe'
+                          email:
+                            type: string
+                            example: john@example.com
+                          roles:
+                            type: array
+                            example:
+                              - admin
+                            items:
+                              type: string
+                          permissions:
+                            type: array
+                            example:
+                              - create-users
+                              - view-stock
+                            items:
+                              type: string
+      tags:
+        - Authentication
+  /api/cattle:
+    get:
+      summary: 'Get Cattle'
+      operationId: getCattle
+      description: 'Retrieve a paginated list of cattle'
+      parameters:
+        -
+          in: query
+          name: breed
+          description: 'Filter by breed'
+          example: inventore
+          required: false
+          schema:
+            type: string
+            description: 'Filter by breed'
+            example: inventore
+            nullable: false
+        -
+          in: query
+          name: gender
+          description: 'Filter by gender (male, female)'
+          example: est
+          required: false
+          schema:
+            type: string
+            description: 'Filter by gender (male, female)'
+            example: est
+            nullable: false
+        -
+          in: query
+          name: status
+          description: 'Filter by status (active, sold, deceased)'
+          example: accusantium
+          required: false
+          schema:
+            type: string
+            description: 'Filter by status (active, sold, deceased)'
+            example: accusantium
+            nullable: false
+        -
+          in: query
+          name: zone_id
+          description: 'Filter by zone ID'
+          example: 16
+          required: false
+          schema:
+            type: integer
+            description: 'Filter by zone ID'
+            example: 16
+            nullable: false
+        -
+          in: query
+          name: search
+          description: 'Search in tag number and name'
+          example: vitae
+          required: false
+          schema:
+            type: string
+            description: 'Search in tag number and name'
+            example: vitae
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"cattle\": [...],\n    \"pagination\": {...}\n  }\n}"
+      tags:
+        - 'Cattle Management'
+    post:
+      summary: 'Create Cattle'
+      operationId: createCattle
+      description: 'Create a new cattle record'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Cattle created successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Cattle Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag_number:
+                  type: string
+                  description: 'Unique tag number'
+                  example: mollitia
+                  nullable: false
+                name:
+                  type: string
+                  description: 'Cattle name'
+                  example: amet
+                  nullable: true
+                breed:
+                  type: string
+                  description: 'Breed name'
+                  example: qui
+                  nullable: false
+                gender:
+                  type: string
+                  description: 'Gender (male, female)'
+                  example: eum
+                  nullable: false
+                birth_date:
+                  type: date
+                  description: 'Birth date'
+                  example: sit
+                  nullable: false
+                mother_tag:
+                  type: string
+                  description: "Mother's tag number"
+                  example: quos
+                  nullable: true
+                father_tag:
+                  type: string
+                  description: "Father's tag number"
+                  example: perspiciatis
+                  nullable: true
+                current_weight:
+                  type: numeric
+                  description: 'Current weight in kg'
+                  example: inventore
+                  nullable: true
+                zone_id:
+                  type: integer
+                  description: 'Zone ID'
+                  example: 7
+                  nullable: true
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: quas
+                  nullable: true
+              required:
+                - tag_number
+                - breed
+                - gender
+                - birth_date
+  '/api/cattle/{id}':
+    get:
+      summary: 'Get Cattle Details'
+      operationId: getCattleDetails
+      description: 'Retrieve a specific cattle with its records'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Cattle Management'
+    put:
+      summary: 'Update Cattle'
+      operationId: updateCattle
+      description: 'Update an existing cattle record'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Cattle updated successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Cattle Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag_number:
+                  type: string
+                  description: 'Unique tag number'
+                  example: sequi
+                  nullable: false
+                name:
+                  type: string
+                  description: 'Cattle name'
+                  example: pariatur
+                  nullable: true
+                breed:
+                  type: string
+                  description: 'Breed name'
+                  example: vel
+                  nullable: false
+                gender:
+                  type: string
+                  description: Gender
+                  example: repudiandae
+                  nullable: false
+                current_weight:
+                  type: numeric
+                  description: 'Current weight in kg'
+                  example: atque
+                  nullable: true
+                zone_id:
+                  type: integer
+                  description: 'Zone ID'
+                  example: 10
+                  nullable: true
+                status:
+                  type: string
+                  description: Status
+                  example: atque
+                  nullable: false
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: perferendis
+                  nullable: true
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Cattle ID'
+        example: 5
+        required: true
+        schema:
+          type: integer
+  /api/cattle/records:
+    post:
+      summary: 'Record Cattle Data'
+      operationId: recordCattleData
+      description: 'Record daily cattle data (milk production, weight, health, etc.)'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Cattle record created successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Cattle Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cattle_id:
+                  type: integer
+                  description: 'Cattle ID'
+                  example: 20
+                  nullable: false
+                record_date:
+                  type: date
+                  description: 'Record date'
+                  example: neque
+                  nullable: false
+                milk_production:
+                  type: numeric
+                  description: 'Milk production in liters'
+                  example: alias
+                  nullable: true
+                weight:
+                  type: numeric
+                  description: 'Weight in kg'
+                  example: repudiandae
+                  nullable: true
+                health_status:
+                  type: string
+                  description: 'Health status (healthy, sick, treated)'
+                  example: quaerat
+                  nullable: true
+                health_notes:
+                  type: string
+                  description: 'Health observations'
+                  example: molestias
+                  nullable: true
+                feeding_notes:
+                  type: string
+                  description: 'Feeding observations'
+                  example: et
+                  nullable: true
+                observations:
+                  type: string
+                  description: 'General observations'
+                  example: maxime
+                  nullable: true
+              required:
+                - cattle_id
+                - record_date
+  /api/crops:
+    get:
+      summary: 'Get Crops'
+      operationId: getCrops
+      description: 'Retrieve a paginated list of crops'
+      parameters:
+        -
+          in: query
+          name: name
+          description: 'Filter by crop name'
+          example: sit
+          required: false
+          schema:
+            type: string
+            description: 'Filter by crop name'
+            example: sit
+            nullable: false
+        -
+          in: query
+          name: variety
+          description: 'Filter by variety'
+          example: esse
+          required: false
+          schema:
+            type: string
+            description: 'Filter by variety'
+            example: esse
+            nullable: false
+        -
+          in: query
+          name: zone_id
+          description: 'Filter by zone ID'
+          example: 16
+          required: false
+          schema:
+            type: integer
+            description: 'Filter by zone ID'
+            example: 16
+            nullable: false
+        -
+          in: query
+          name: status
+          description: 'Filter by status (planted, growing, harvested, failed)'
+          example: saepe
+          required: false
+          schema:
+            type: string
+            description: 'Filter by status (planted, growing, harvested, failed)'
+            example: saepe
+            nullable: false
+        -
+          in: query
+          name: search
+          description: 'Search in name and variety'
+          example: itaque
+          required: false
+          schema:
+            type: string
+            description: 'Search in name and variety'
+            example: itaque
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"crops\": [...],\n    \"pagination\": {...}\n  }\n}"
+      tags:
+        - 'Crop Management'
+    post:
+      summary: 'Create Crop'
+      operationId: createCrop
+      description: 'Create a new crop record'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Crop created successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Crop Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Crop name'
+                  example: aut
+                  nullable: false
+                variety:
+                  type: string
+                  description: 'Crop variety'
+                  example: est
+                  nullable: false
+                zone_id:
+                  type: integer
+                  description: 'Zone ID'
+                  example: 17
+                  nullable: false
+                planting_date:
+                  type: date
+                  description: 'Planting date'
+                  example: sed
+                  nullable: false
+                expected_harvest_date:
+                  type: date
+                  description: 'Expected harvest date'
+                  example: sit
+                  nullable: true
+                planted_area:
+                  type: numeric
+                  description: 'Planted area in square meters'
+                  example: voluptatem
+                  nullable: false
+                expected_yield:
+                  type: numeric
+                  description: 'Expected yield in kg'
+                  example: consequatur
+                  nullable: true
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: dicta
+                  nullable: true
+              required:
+                - name
+                - variety
+                - zone_id
+                - planting_date
+                - planted_area
+  '/api/crops/{id}':
+    get:
+      summary: 'Get Crop Details'
+      operationId: getCropDetails
+      description: 'Retrieve a specific crop with its activities'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Crop Management'
+    put:
+      summary: 'Update Crop'
+      operationId: updateCrop
+      description: 'Update an existing crop record'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Crop updated successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Crop Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Crop name'
+                  example: impedit
+                  nullable: false
+                variety:
+                  type: string
+                  description: 'Crop variety'
+                  example: tempore
+                  nullable: false
+                zone_id:
+                  type: integer
+                  description: 'Zone ID'
+                  example: 5
+                  nullable: false
+                expected_harvest_date:
+                  type: date
+                  description: 'Expected harvest date'
+                  example: omnis
+                  nullable: true
+                actual_harvest_date:
+                  type: date
+                  description: 'Actual harvest date'
+                  example: est
+                  nullable: true
+                planted_area:
+                  type: numeric
+                  description: 'Planted area in square meters'
+                  example: consequatur
+                  nullable: false
+                expected_yield:
+                  type: numeric
+                  description: 'Expected yield in kg'
+                  example: eaque
+                  nullable: true
+                actual_yield:
+                  type: numeric
+                  description: 'Actual yield in kg'
+                  example: non
+                  nullable: true
+                status:
+                  type: string
+                  description: Status
+                  example: magnam
+                  nullable: false
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: tenetur
+                  nullable: true
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Crop ID'
+        example: 7
+        required: true
+        schema:
+          type: integer
+  /api/crops/activities:
+    post:
+      summary: 'Record Crop Activity'
+      operationId: recordCropActivity
+      description: 'Record an agricultural activity for a crop'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Crop activity recorded successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Crop Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                crop_id:
+                  type: integer
+                  description: 'Crop ID'
+                  example: 10
+                  nullable: false
+                activity_type:
+                  type: string
+                  description: 'Activity type (planting, fertilizing, irrigation, pest_control, harvesting)'
+                  example: sint
+                  nullable: false
+                activity_date:
+                  type: date
+                  description: 'Activity date'
+                  example: non
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Activity description'
+                  example: 'Tempore soluta consequatur exercitationem.'
+                  nullable: false
+                materials_used:
+                  type: json
+                  description: 'Materials used (array of stock items)'
+                  example: et
+                  nullable: true
+                cost:
+                  type: numeric
+                  description: 'Activity cost'
+                  example: sequi
+                  nullable: true
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: officia
+                  nullable: true
+              required:
+                - crop_id
+                - activity_type
+                - activity_date
+                - description
+  '/api/crops/{id}/activities':
+    get:
+      summary: 'Get Crop Activities'
+      operationId: getCropActivities
+      description: 'Retrieve activities for a specific crop'
+      parameters:
+        -
+          in: query
+          name: activity_type
+          description: 'Filter by activity type'
+          example: aut
+          required: false
+          schema:
+            type: string
+            description: 'Filter by activity type'
+            example: aut
+            nullable: false
+        -
+          in: query
+          name: start_date
+          description: 'date Filter activities from date'
+          example: distinctio
+          required: false
+          schema:
+            type: string
+            description: 'date Filter activities from date'
+            example: distinctio
+            nullable: false
+        -
+          in: query
+          name: end_date
+          description: 'date Filter activities to date'
+          example: nulla
+          required: false
+          schema:
+            type: string
+            description: 'date Filter activities to date'
+            example: nulla
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"activities\": [...],\n    \"pagination\": {...}\n  }\n}"
+      tags:
+        - 'Crop Management'
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Crop ID'
+        example: 11
+        required: true
+        schema:
+          type: integer
+  /api/dashboard:
+    get:
+      summary: 'Get Dashboard Data'
+      operationId: getDashboardData
+      description: 'Retrieve key performance indicators and summary data'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"kpis\": {\n      \"stock_alerts\": {...},\n      \"poultry_stats\": {...},\n      \"cattle_stats\": {...},\n      \"crop_stats\": {...},\n      \"tasks\": {...}\n    },\n    \"recent_activities\": [...]\n  }\n}"
+      tags:
+        - Dashboard
+  /api/dashboard/stock-alerts:
+    get:
+      summary: 'Get Stock Alerts'
+      operationId: getStockAlerts
+      description: 'Get stock items with low stock or expired items'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"low_stock\": [...],\n    \"expired_items\": [...],\n    \"expiring_soon\": [...]\n  }\n}"
+      tags:
+        - Dashboard
+  /api/dashboard/poultry-stats:
+    get:
+      summary: 'Get Poultry Statistics'
+      operationId: getPoultryStatistics
+      description: 'Get poultry performance statistics'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  data:
+                    total_flocks: 0
+                    total_birds: 0
+                    average_mortality_rate: 0
+                    daily_egg_production: 0
+                    feed_consumption: 0
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      total_flocks:
+                        type: integer
+                        example: 0
+                      total_birds:
+                        type: integer
+                        example: 0
+                      average_mortality_rate:
+                        type: integer
+                        example: 0
+                      daily_egg_production:
+                        type: integer
+                        example: 0
+                      feed_consumption:
+                        type: integer
+                        example: 0
+      tags:
+        - Dashboard
+  /api/dashboard/cattle-stats:
+    get:
+      summary: 'Get Cattle Statistics'
+      operationId: getCattleStatistics
+      description: 'Get cattle performance statistics'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"total_cattle\": 0,\n    \"milk_production_today\": 0,\n    \"average_weight\": 0,\n    \"health_status\": {...}\n  }\n}"
+      tags:
+        - Dashboard
+  /api/dashboard/crop-stats:
+    get:
+      summary: 'Get Crop Statistics'
+      operationId: getCropStatistics
+      description: 'Get crop performance statistics'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  data:
+                    total_crops: 0
+                    harvested_crops: 0
+                    average_yield_per_sqm: 0
+                    upcoming_harvests: 0
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      total_crops:
+                        type: integer
+                        example: 0
+                      harvested_crops:
+                        type: integer
+                        example: 0
+                      average_yield_per_sqm:
+                        type: integer
+                        example: 0
+                      upcoming_harvests:
+                        type: integer
+                        example: 0
+      tags:
+        - Dashboard
+  /api/dashboard/task-stats:
+    get:
+      summary: 'Get Task Statistics'
+      operationId: getTaskStatistics
+      description: 'Get task management statistics'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"pending_tasks\": 0,\n    \"overdue_tasks\": 0,\n    \"completed_today\": 0,\n    \"tasks_by_priority\": {...}\n  }\n}"
+      tags:
+        - Dashboard
+  /api/notifications:
+    get:
+      summary: ''
+      operationId: getApiNotifications
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+    post:
+      summary: ''
+      operationId: postApiNotifications
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: jkxdrykrzsttntszwna
+                  nullable: false
+                title:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: zzykjlrnqpglfon
+                  nullable: false
+                message:
+                  type: string
+                  description: ''
+                  example: nihil
+                  nullable: false
+                priority:
+                  type: string
+                  description: ''
+                  example: medium
+                  nullable: false
+                  enum:
+                    - low
+                    - medium
+                    - high
+                    - urgent
+                user_id:
+                  type: string
+                  description: 'The <code>id</code> of an existing record in the users table.'
+                  example: null
+                  nullable: true
+                related_entity_id:
+                  type: integer
+                  description: ''
+                  example: 11
+                  nullable: true
+                related_entity_type:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: hrm
+                  nullable: true
+              required:
+                - type
+                - title
+                - message
+                - priority
+  /api/notifications/unread:
+    get:
+      summary: ''
+      operationId: getApiNotificationsUnread
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+  '/api/notifications/{notification_id}/read':
+    put:
+      summary: ''
+      operationId: putApiNotificationsNotification_idRead
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: notification_id
+        description: 'The ID of the notification.'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  /api/notifications/mark-all-read:
+    put:
+      summary: ''
+      operationId: putApiNotificationsMarkAllRead
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+  '/api/notifications/{notification_id}':
+    delete:
+      summary: ''
+      operationId: deleteApiNotificationsNotification_id
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: notification_id
+        description: 'The ID of the notification.'
+        example: 5
+        required: true
+        schema:
+          type: integer
+  /api/financial/transactions:
+    get:
+      summary: 'Récupérer toutes les transactions'
+      operationId: rcuprerToutesLesTransactions
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Financière'
+    post:
+      summary: 'Créer une nouvelle transaction'
+      operationId: crerUneNouvelleTransaction
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Financière'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: ''
+                  example: income
+                  nullable: false
+                  enum:
+                    - income
+                    - expense
+                    - transfer
+                category:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: u
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Must not be greater than 500 characters.'
+                  example: 'Non consectetur quisquam animi officia commodi dolorem doloremque.'
+                  nullable: false
+                amount:
+                  type: number
+                  description: 'Must be at least 0.'
+                  example: 86
+                  nullable: false
+                currency:
+                  type: string
+                  description: 'Must not be greater than 3 characters.'
+                  example: d
+                  nullable: false
+                transaction_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2025-09-10T19:01:41'
+                  nullable: false
+                payment_method:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: dty
+                  nullable: true
+                reference:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: qfdcrbtlelmhkwbn
+                  nullable: true
+                notes:
+                  type: string
+                  description: ''
+                  example: sit
+                  nullable: true
+                related_entity_id:
+                  type: integer
+                  description: ''
+                  example: 20
+                  nullable: true
+                related_entity_type:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: jnavhgggdu
+                  nullable: true
+              required:
+                - type
+                - category
+                - description
+                - amount
+                - transaction_date
+  '/api/financial/transactions/{transaction_id}':
+    get:
+      summary: 'Récupérer une transaction spécifique'
+      operationId: rcuprerUneTransactionSpcifique
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Financière'
+    put:
+      summary: 'Mettre à jour une transaction'
+      operationId: mettreJourUneTransaction
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Financière'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: ''
+                  example: income
+                  nullable: false
+                  enum:
+                    - income
+                    - expense
+                    - transfer
+                category:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: wdhfk
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Must not be greater than 500 characters.'
+                  example: 'Sit voluptas sunt ratione saepe aut ipsa iste non.'
+                  nullable: false
+                amount:
+                  type: number
+                  description: 'Must be at least 0.'
+                  example: 66
+                  nullable: false
+                currency:
+                  type: string
+                  description: 'Must not be greater than 3 characters.'
+                  example: dd
+                  nullable: false
+                transaction_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2025-09-10T19:01:41'
+                  nullable: false
+                payment_method:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: yzheksqjforqksihmuvkrbjn
+                  nullable: true
+                reference:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: kgeglrpffqgasayj
+                  nullable: true
+                notes:
+                  type: string
+                  description: ''
+                  example: voluptatem
+                  nullable: true
+    delete:
+      summary: 'Supprimer une transaction'
+      operationId: supprimerUneTransaction
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Financière'
+    parameters:
+      -
+        in: path
+        name: transaction_id
+        description: 'The ID of the transaction.'
+        example: 4
+        required: true
+        schema:
+          type: integer
+  /api/financial/budgets:
+    get:
+      summary: 'Récupérer tous les budgets'
+      operationId: rcuprerTousLesBudgets
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Financière'
+    post:
+      summary: 'Créer un nouveau budget'
+      operationId: crerUnNouveauBudget
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Financière'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: zkdoziqphvvgc
+                  nullable: false
+                description:
+                  type: string
+                  description: ''
+                  example: 'Occaecati aut libero eligendi.'
+                  nullable: true
+                category:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: yvgh
+                  nullable: false
+                allocated_amount:
+                  type: number
+                  description: 'Must be at least 0.'
+                  example: 81
+                  nullable: false
+                currency:
+                  type: string
+                  description: 'Must not be greater than 3 characters.'
+                  example: cri
+                  nullable: false
+                start_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2025-09-10T19:01:41'
+                  nullable: false
+                end_date:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after <code>start_date</code>.'
+                  example: '2046-06-07'
+                  nullable: false
+              required:
+                - name
+                - category
+                - allocated_amount
+                - start_date
+                - end_date
+  /api/financial/reports:
+    get:
+      summary: 'Récupérer les rapports financiers'
+      operationId: rcuprerLesRapportsFinanciers
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Financière'
+  /api/veterinary/treatments:
+    get:
+      summary: 'Récupérer tous les traitements vétérinaires'
+      operationId: rcuprerTousLesTraitementsVtrinaires
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Vétérinaire'
+    post:
+      summary: 'Créer un nouveau traitement vétérinaire'
+      operationId: crerUnNouveauTraitementVtrinaire
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Vétérinaire'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                treatment_type:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: kgdgiswbbikpatumiawwvhvv
+                  nullable: false
+                treatment_name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: kdviemmjijubgmyyygayu
+                  nullable: false
+                description:
+                  type: string
+                  description: ''
+                  example: 'Voluptatum expedita officia quam quaerat ad consequuntur.'
+                  nullable: true
+                treatment_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2025-09-10T19:01:41'
+                  nullable: false
+                treatment_time:
+                  type: string
+                  description: 'Must be a valid date in the format <code>H:i</code>.'
+                  example: '19:01'
+                  nullable: true
+                animal_type:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: ukfinsseyvbrbsdkyisgbu
+                  nullable: false
+                animal_id:
+                  type: integer
+                  description: ''
+                  example: 8
+                  nullable: true
+                animal_identifier:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: rfeuud
+                  nullable: true
+                veterinarian_name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: kjinor
+                  nullable: true
+                veterinarian_license:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: yplsyhafspohnjrgpmunsmcn
+                  nullable: true
+                medications:
+                  type: object
+                  description: ''
+                  example: null
+                  nullable: true
+                  properties: {  }
+                dosages:
+                  type: object
+                  description: ''
+                  example: null
+                  nullable: true
+                  properties: {  }
+                cost:
+                  type: number
+                  description: 'Must be at least 0.'
+                  example: 47
+                  nullable: true
+                next_treatment_date:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after <code>treatment_date</code>.'
+                  example: '2054-05-17'
+                  nullable: true
+                notes:
+                  type: string
+                  description: ''
+                  example: neque
+                  nullable: true
+                attachments:
+                  type: object
+                  description: ''
+                  example: null
+                  nullable: true
+                  properties: {  }
+              required:
+                - treatment_type
+                - treatment_name
+                - treatment_date
+                - animal_type
+  '/api/veterinary/treatments/{treatment_id}':
+    get:
+      summary: 'Récupérer un traitement spécifique'
+      operationId: rcuprerUnTraitementSpcifique
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Vétérinaire'
+    put:
+      summary: 'Mettre à jour un traitement'
+      operationId: mettreJourUnTraitement
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Vétérinaire'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                treatment_type:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: vftbdyyqednlrfkvtkilxgpk
+                  nullable: false
+                treatment_name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: fwavkskiqfzuzdxebqdm
+                  nullable: false
+                description:
+                  type: string
+                  description: ''
+                  example: 'Quam et voluptatibus consectetur cumque.'
+                  nullable: true
+                treatment_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2025-09-10T19:01:42'
+                  nullable: false
+                treatment_time:
+                  type: string
+                  description: 'Must be a valid date in the format <code>H:i</code>.'
+                  example: '19:01'
+                  nullable: true
+                animal_type:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: kgpxdmoxggdgpxhs
+                  nullable: false
+                animal_id:
+                  type: integer
+                  description: ''
+                  example: 9
+                  nullable: true
+                animal_identifier:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: fgjznwbk
+                  nullable: true
+                veterinarian_name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: fvvxgixseiziqxhrkni
+                  nullable: true
+                veterinarian_license:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: tyhg
+                  nullable: true
+                medications:
+                  type: object
+                  description: ''
+                  example: null
+                  nullable: true
+                  properties: {  }
+                dosages:
+                  type: object
+                  description: ''
+                  example: null
+                  nullable: true
+                  properties: {  }
+                cost:
+                  type: number
+                  description: 'Must be at least 0.'
+                  example: 0
+                  nullable: true
+                next_treatment_date:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after <code>treatment_date</code>.'
+                  example: '2040-01-03'
+                  nullable: true
+                notes:
+                  type: string
+                  description: ''
+                  example: unde
+                  nullable: true
+                attachments:
+                  type: object
+                  description: ''
+                  example: null
+                  nullable: true
+                  properties: {  }
+    delete:
+      summary: 'Supprimer un traitement'
+      operationId: supprimerUnTraitement
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Vétérinaire'
+    parameters:
+      -
+        in: path
+        name: treatment_id
+        description: 'The ID of the treatment.'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  /api/veterinary/schedule:
+    get:
+      summary: 'Récupérer le planning des soins'
+      operationId: rcuprerLePlanningDesSoins
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Vétérinaire'
+  /api/veterinary/reminders:
+    get:
+      summary: 'Récupérer les rappels de soins'
+      operationId: rcuprerLesRappelsDeSoins
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Vétérinaire'
+  /api/veterinary/animal-history:
+    get:
+      summary: "Récupérer l'historique médical d'un animal"
+      operationId: rcuprerLhistoriqueMdicalDunAnimal
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Vétérinaire'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                animal_id:
+                  type: integer
+                  description: ''
+                  example: 1
+                  nullable: false
+                animal_type:
+                  type: string
+                  description: ''
+                  example: numquam
+                  nullable: false
+              required:
+                - animal_id
+                - animal_type
+  /api/veterinary/stats:
+    get:
+      summary: 'Récupérer les statistiques vétérinaires'
+      operationId: rcuprerLesStatistiquesVtrinaires
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Gestion Vétérinaire'
+  /api/health:
+    get:
+      summary: 'Health Check'
+      operationId: healthCheck
+      description: 'Check the health status of the API and database'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: healthy
+                  timestamp: '2024-01-20T10:30:00Z'
+                  services:
+                    database: connected
+                    cache: connected
+                properties:
+                  status:
+                    type: string
+                    example: healthy
+                  timestamp:
+                    type: string
+                    example: '2024-01-20T10:30:00Z'
+                  services:
+                    type: object
+                    properties:
+                      database:
+                        type: string
+                        example: connected
+                      cache:
+                        type: string
+                        example: connected
+      tags:
+        - 'Health Check'
+  /api/info:
+    get:
+      summary: 'System Info'
+      operationId: systemInfo
+      description: 'Get system information and statistics'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  data:
+                    version: 1.0.0
+                    environment: production
+                    php_version: 8.1.0
+                    laravel_version: 10.0.0
+                    database_size: '15.2 MB'
+                    total_users: 5
+                    total_records: 1250
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      version:
+                        type: string
+                        example: 1.0.0
+                      environment:
+                        type: string
+                        example: production
+                      php_version:
+                        type: string
+                        example: 8.1.0
+                      laravel_version:
+                        type: string
+                        example: 10.0.0
+                      database_size:
+                        type: string
+                        example: '15.2 MB'
+                      total_users:
+                        type: integer
+                        example: 5
+                      total_records:
+                        type: integer
+                        example: 1250
+      tags:
+        - 'Health Check'
+  /api/poultry/flocks:
+    get:
+      summary: 'Get Poultry Flocks'
+      operationId: getPoultryFlocks
+      description: 'Retrieve a paginated list of poultry flocks'
+      parameters:
+        -
+          in: query
+          name: type
+          description: 'Filter by flock type (layer, broiler, duck, turkey)'
+          example: saepe
+          required: false
+          schema:
+            type: string
+            description: 'Filter by flock type (layer, broiler, duck, turkey)'
+            example: saepe
+            nullable: false
+        -
+          in: query
+          name: status
+          description: 'Filter by status (active, sold, deceased)'
+          example: qui
+          required: false
+          schema:
+            type: string
+            description: 'Filter by status (active, sold, deceased)'
+            example: qui
+            nullable: false
+        -
+          in: query
+          name: zone_id
+          description: 'Filter by zone ID'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'Filter by zone ID'
+            example: 1
+            nullable: false
+        -
+          in: query
+          name: search
+          description: 'Search in flock number and breed'
+          example: tempora
+          required: false
+          schema:
+            type: string
+            description: 'Search in flock number and breed'
+            example: tempora
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"flocks\": [...],\n    \"pagination\": {...}\n  }\n}"
+      tags:
+        - 'Poultry Management'
+    post:
+      summary: 'Create Poultry Flock'
+      operationId: createPoultryFlock
+      description: 'Create a new poultry flock'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Poultry flock created successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Poultry Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flock_number:
+                  type: string
+                  description: 'Unique flock number'
+                  example: in
+                  nullable: false
+                type:
+                  type: string
+                  description: 'Flock type (layer, broiler, duck, turkey)'
+                  example: soluta
+                  nullable: false
+                breed:
+                  type: string
+                  description: 'Breed name'
+                  example: reprehenderit
+                  nullable: false
+                initial_quantity:
+                  type: integer
+                  description: 'Initial number of birds'
+                  example: 3
+                  nullable: false
+                arrival_date:
+                  type: date
+                  description: 'Arrival date'
+                  example: et
+                  nullable: false
+                zone_id:
+                  type: integer
+                  description: 'Zone ID'
+                  example: 1
+                  nullable: true
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: quasi
+                  nullable: true
+              required:
+                - flock_number
+                - type
+                - breed
+                - initial_quantity
+                - arrival_date
+  '/api/poultry/flocks/{id}':
+    get:
+      summary: 'Get Poultry Flock'
+      operationId: getPoultryFlock
+      description: 'Retrieve a specific poultry flock with its records'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Poultry Management'
+    put:
+      summary: 'Update Poultry Flock'
+      operationId: updatePoultryFlock
+      description: 'Update an existing poultry flock'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Poultry flock updated successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Poultry Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flock_number:
+                  type: string
+                  description: 'Unique flock number'
+                  example: ratione
+                  nullable: false
+                type:
+                  type: string
+                  description: 'Flock type'
+                  example: error
+                  nullable: false
+                breed:
+                  type: string
+                  description: 'Breed name'
+                  example: placeat
+                  nullable: false
+                current_quantity:
+                  type: integer
+                  description: 'Current number of birds'
+                  example: 15
+                  nullable: false
+                zone_id:
+                  type: integer
+                  description: 'Zone ID'
+                  example: 13
+                  nullable: true
+                status:
+                  type: string
+                  description: Status
+                  example: esse
+                  nullable: false
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: porro
+                  nullable: true
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Flock ID'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  /api/poultry/records:
+    post:
+      summary: 'Record Poultry Data'
+      operationId: recordPoultryData
+      description: 'Record daily poultry data (eggs, feed, mortality, etc.)'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Poultry record created successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Poultry Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flock_id:
+                  type: integer
+                  description: 'Flock ID'
+                  example: 16
+                  nullable: false
+                record_date:
+                  type: date
+                  description: 'Record date'
+                  example: maiores
+                  nullable: false
+                eggs_collected:
+                  type: integer
+                  description: 'Number of eggs collected'
+                  example: 11
+                  nullable: true
+                feed_consumed:
+                  type: numeric
+                  description: 'Feed consumed in kg'
+                  example: ducimus
+                  nullable: true
+                mortality_count:
+                  type: integer
+                  description: 'Number of deaths'
+                  example: 16
+                  nullable: true
+                average_weight:
+                  type: numeric
+                  description: 'Average weight in kg'
+                  example: temporibus
+                  nullable: true
+                health_notes:
+                  type: string
+                  description: 'Health observations'
+                  example: cum
+                  nullable: true
+                observations:
+                  type: string
+                  description: 'General observations'
+                  example: aut
+                  nullable: true
+              required:
+                - flock_id
+                - record_date
+  /api/poultry/incubation:
+    get:
+      summary: 'Get Incubation Records'
+      operationId: getIncubationRecords
+      description: 'Retrieve incubation records'
+      parameters:
+        -
+          in: query
+          name: egg_type
+          description: 'Filter by egg type'
+          example: delectus
+          required: false
+          schema:
+            type: string
+            description: 'Filter by egg type'
+            example: delectus
+            nullable: false
+        -
+          in: query
+          name: breed
+          description: 'Filter by breed'
+          example: et
+          required: false
+          schema:
+            type: string
+            description: 'Filter by breed'
+            example: et
+            nullable: false
+        -
+          in: query
+          name: start_date
+          description: 'date Filter by start date'
+          example: quisquam
+          required: false
+          schema:
+            type: string
+            description: 'date Filter by start date'
+            example: quisquam
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"records\": [...],\n    \"pagination\": {...}\n  }\n}"
+      tags:
+        - 'Poultry Management'
+    post:
+      summary: 'Create Incubation Record'
+      operationId: createIncubationRecord
+      description: 'Create a new incubation record'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Incubation record created successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Poultry Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                batch_number:
+                  type: string
+                  description: 'Unique batch number'
+                  example: minima
+                  nullable: false
+                egg_type:
+                  type: string
+                  description: 'Egg type (chicken, duck, turkey)'
+                  example: corporis
+                  nullable: false
+                breed:
+                  type: string
+                  description: 'Breed name'
+                  example: eos
+                  nullable: false
+                egg_count:
+                  type: integer
+                  description: 'Number of eggs'
+                  example: 12
+                  nullable: false
+                start_date:
+                  type: date
+                  description: 'Incubation start date'
+                  example: aspernatur
+                  nullable: false
+                incubation_days:
+                  type: integer
+                  description: 'Incubation period in days'
+                  example: 3
+                  nullable: false
+                temperature:
+                  type: numeric
+                  description: 'Temperature in Celsius'
+                  example: dolorem
+                  nullable: false
+                humidity_percentage:
+                  type: numeric
+                  description: 'Humidity percentage'
+                  example: debitis
+                  nullable: false
+                egg_size:
+                  type: string
+                  description: 'Egg size (small, medium, large)'
+                  example: soluta
+                  nullable: false
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: incidunt
+                  nullable: true
+              required:
+                - batch_number
+                - egg_type
+                - breed
+                - egg_count
+                - start_date
+                - incubation_days
+                - temperature
+                - humidity_percentage
+                - egg_size
+  '/api/poultry/incubation/{id}/results':
+    put:
+      summary: 'Update Incubation Results'
+      operationId: updateIncubationResults
+      description: 'Update incubation record with hatching results'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Incubation results updated successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Poultry Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hatched_count:
+                  type: integer
+                  description: 'Number of hatched eggs'
+                  example: 4
+                  nullable: false
+                unhatched_count:
+                  type: integer
+                  description: 'Number of unhatched eggs'
+                  example: 10
+                  nullable: false
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: quae
+                  nullable: true
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Incubation record ID'
+        example: 3
+        required: true
+        schema:
+          type: integer
+  /api/reports/poultry-production:
+    get:
+      summary: 'Get Poultry Production Report'
+      operationId: getPoultryProductionReport
+      description: 'Generate poultry production report for a date range'
+      parameters:
+        -
+          in: query
+          name: start_date
+          description: 'date Start date'
+          example: omnis
+          required: true
+          schema:
+            type: string
+            description: 'date Start date'
+            example: omnis
+            nullable: false
+        -
+          in: query
+          name: end_date
+          description: 'date End date'
+          example: pariatur
+          required: true
+          schema:
+            type: string
+            description: 'date End date'
+            example: pariatur
+            nullable: false
+        -
+          in: query
+          name: flock_id
+          description: 'Filter by flock ID'
+          example: 13
+          required: false
+          schema:
+            type: integer
+            description: 'Filter by flock ID'
+            example: 13
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"summary\": {...},\n    \"daily_data\": [...],\n    \"flock_performance\": [...]\n  }\n}"
+      tags:
+        - Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2025-09-10T19:01:40'
+                  nullable: false
+                end_date:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
+                  example: '2031-08-21'
+                  nullable: false
+                flock_id:
+                  type: string
+                  description: 'The <code>id</code> of an existing record in the poultry_flocks table.'
+                  example: null
+                  nullable: true
+              required:
+                - start_date
+                - end_date
+  /api/reports/cattle-production:
+    get:
+      summary: 'Get Cattle Production Report'
+      operationId: getCattleProductionReport
+      description: 'Generate cattle production report for a date range'
+      parameters:
+        -
+          in: query
+          name: start_date
+          description: 'date Start date'
+          example: doloremque
+          required: true
+          schema:
+            type: string
+            description: 'date Start date'
+            example: doloremque
+            nullable: false
+        -
+          in: query
+          name: end_date
+          description: 'date End date'
+          example: culpa
+          required: true
+          schema:
+            type: string
+            description: 'date End date'
+            example: culpa
+            nullable: false
+        -
+          in: query
+          name: cattle_id
+          description: 'Filter by cattle ID'
+          example: 3
+          required: false
+          schema:
+            type: integer
+            description: 'Filter by cattle ID'
+            example: 3
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"summary\": {...},\n    \"daily_data\": [...],\n    \"cattle_performance\": [...]\n  }\n}"
+      tags:
+        - Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2025-09-10T19:01:40'
+                  nullable: false
+                end_date:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
+                  example: '2042-11-26'
+                  nullable: false
+                cattle_id:
+                  type: string
+                  description: 'The <code>id</code> of an existing record in the cattle table.'
+                  example: null
+                  nullable: true
+              required:
+                - start_date
+                - end_date
+  /api/reports/stock-movements:
+    get:
+      summary: 'Get Stock Movement Report'
+      operationId: getStockMovementReport
+      description: 'Generate stock movement report for a date range'
+      parameters:
+        -
+          in: query
+          name: start_date
+          description: 'date Start date'
+          example: occaecati
+          required: true
+          schema:
+            type: string
+            description: 'date Start date'
+            example: occaecati
+            nullable: false
+        -
+          in: query
+          name: end_date
+          description: 'date End date'
+          example: id
+          required: true
+          schema:
+            type: string
+            description: 'date End date'
+            example: id
+            nullable: false
+        -
+          in: query
+          name: category_id
+          description: 'Filter by category ID'
+          example: 13
+          required: false
+          schema:
+            type: integer
+            description: 'Filter by category ID'
+            example: 13
+            nullable: false
+        -
+          in: query
+          name: type
+          description: 'Filter by movement type (in, out, adjustment)'
+          example: animi
+          required: false
+          schema:
+            type: string
+            description: 'Filter by movement type (in, out, adjustment)'
+            example: animi
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"summary\": {...},\n    \"movements\": [...],\n    \"category_breakdown\": [...]\n  }\n}"
+      tags:
+        - Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2025-09-10T19:01:40'
+                  nullable: false
+                end_date:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
+                  example: '2079-12-28'
+                  nullable: false
+                category_id:
+                  type: string
+                  description: 'The <code>id</code> of an existing record in the stock_categories table.'
+                  example: null
+                  nullable: true
+                type:
+                  type: string
+                  description: ''
+                  example: in
+                  nullable: true
+                  enum:
+                    - in
+                    - out
+                    - adjustment
+              required:
+                - start_date
+                - end_date
+  /api/reports/crop-performance:
+    get:
+      summary: 'Get Crop Performance Report'
+      operationId: getCropPerformanceReport
+      description: 'Generate crop performance report'
+      parameters:
+        -
+          in: query
+          name: year
+          description: 'Filter by year'
+          example: 13
+          required: false
+          schema:
+            type: integer
+            description: 'Filter by year'
+            example: 13
+            nullable: false
+        -
+          in: query
+          name: crop_name
+          description: 'Filter by crop name'
+          example: laboriosam
+          required: false
+          schema:
+            type: string
+            description: 'Filter by crop name'
+            example: laboriosam
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"summary\": {...},\n    \"crop_performance\": [...],\n    \"activities_summary\": [...]\n  }\n}"
+      tags:
+        - Reports
+  /api/reports/financial-summary:
+    get:
+      summary: 'Get Financial Summary Report'
+      operationId: getFinancialSummaryReport
+      description: 'Generate financial summary report'
+      parameters:
+        -
+          in: query
+          name: start_date
+          description: 'date Start date'
+          example: rem
+          required: true
+          schema:
+            type: string
+            description: 'date Start date'
+            example: rem
+            nullable: false
+        -
+          in: query
+          name: end_date
+          description: 'date End date'
+          example: aut
+          required: true
+          schema:
+            type: string
+            description: 'date End date'
+            example: aut
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"revenue\": {...},\n    \"expenses\": {...},\n    \"profit_loss\": {...}\n  }\n}"
+      tags:
+        - Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2025-09-10T19:01:40'
+                  nullable: false
+                end_date:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
+                  example: '2073-07-05'
+                  nullable: false
+              required:
+                - start_date
+                - end_date
+  /api/stock/categories:
+    get:
+      summary: 'Get Stock Categories'
+      operationId: getStockCategories
+      description: 'Retrieve a list of stock categories'
+      parameters:
+        -
+          in: query
+          name: type
+          description: 'Filter by category type'
+          example: adipisci
+          required: false
+          schema:
+            type: string
+            description: 'Filter by category type'
+            example: adipisci
+            nullable: false
+        -
+          in: query
+          name: search
+          description: 'Search in name and description'
+          example: deserunt
+          required: false
+          schema:
+            type: string
+            description: 'Search in name and description'
+            example: deserunt
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": [...]\n}"
+      tags:
+        - 'Stock Categories'
+    post:
+      summary: 'Create Stock Category'
+      operationId: createStockCategory
+      description: 'Create a new stock category'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Stock category created successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Stock Categories'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Category name'
+                  example: iure
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Category description'
+                  example: 'Asperiores nihil quisquam asperiores eos tempora.'
+                  nullable: true
+                type:
+                  type: string
+                  description: 'Category type (agricultural_inputs, animal_feed, equipment, veterinary_products)'
+                  example: quo
+                  nullable: false
+              required:
+                - name
+                - type
+  '/api/stock/categories/{id}':
+    get:
+      summary: 'Get Stock Category Details'
+      operationId: getStockCategoryDetails
+      description: 'Retrieve a specific stock category with its items'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Stock Categories'
+    put:
+      summary: 'Update Stock Category'
+      operationId: updateStockCategory
+      description: 'Update an existing stock category'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Stock category updated successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Stock Categories'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Category name'
+                  example: laborum
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Category description'
+                  example: 'Officia mollitia ad dolorum velit consequatur.'
+                  nullable: true
+                type:
+                  type: string
+                  description: 'Category type'
+                  example: quae
+                  nullable: false
+    delete:
+      summary: 'Delete Stock Category'
+      operationId: deleteStockCategory
+      description: 'Delete a stock category'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Stock category deleted successfully'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Stock category deleted successfully'
+      tags:
+        - 'Stock Categories'
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Category ID'
+        example: 11
+        required: true
+        schema:
+          type: integer
+  /api/stock/items:
+    get:
+      summary: 'Get Stock Items'
+      operationId: getStockItems
+      description: 'Retrieve a paginated list of stock items with optional filtering'
+      parameters:
+        -
+          in: query
+          name: category_id
+          description: 'Filter by category ID'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'Filter by category ID'
+            example: 1
+            nullable: false
+        -
+          in: query
+          name: type
+          description: 'Filter by item type'
+          example: ex
+          required: false
+          schema:
+            type: string
+            description: 'Filter by item type'
+            example: ex
+            nullable: false
+        -
+          in: query
+          name: search
+          description: 'Search in name and description'
+          example: ipsum
+          required: false
+          schema:
+            type: string
+            description: 'Search in name and description'
+            example: ipsum
+            nullable: false
+        -
+          in: query
+          name: low_stock
+          description: 'Filter items with low stock'
+          example: false
+          required: false
+          schema:
+            type: boolean
+            description: 'Filter items with low stock'
+            example: false
+            nullable: false
+        -
+          in: query
+          name: expired
+          description: 'Filter expired items'
+          example: false
+          required: false
+          schema:
+            type: boolean
+            description: 'Filter expired items'
+            example: false
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"items\": [...],\n    \"pagination\": {...}\n  }\n}"
+      tags:
+        - 'Stock Management'
+    post:
+      summary: 'Create Stock Item'
+      operationId: createStockItem
+      description: 'Create a new stock item'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Stock item created successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Stock Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Item name'
+                  example: ea
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Item description'
+                  example: 'Cumque debitis voluptates deserunt eaque.'
+                  nullable: true
+                sku:
+                  type: string
+                  description: 'Unique SKU'
+                  example: voluptas
+                  nullable: false
+                category_id:
+                  type: integer
+                  description: 'Category ID'
+                  example: 8
+                  nullable: false
+                unit:
+                  type: string
+                  description: 'Unit of measurement'
+                  example: corrupti
+                  nullable: false
+                current_quantity:
+                  type: numeric
+                  description: 'Initial quantity'
+                  example: quis
+                  nullable: true
+                minimum_quantity:
+                  type: numeric
+                  description: 'Minimum stock level'
+                  example: commodi
+                  nullable: true
+                unit_cost:
+                  type: numeric
+                  description: 'Unit cost'
+                  example: alias
+                  nullable: true
+                expiry_date:
+                  type: date
+                  description: 'Expiry date'
+                  example: impedit
+                  nullable: true
+                supplier:
+                  type: string
+                  description: 'Supplier name'
+                  example: doloribus
+                  nullable: true
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: rerum
+                  nullable: true
+              required:
+                - name
+                - sku
+                - category_id
+                - unit
+  '/api/stock/items/{id}':
+    get:
+      summary: 'Get Stock Item'
+      operationId: getStockItem
+      description: 'Retrieve a specific stock item with its movements'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Stock Management'
+    put:
+      summary: 'Update Stock Item'
+      operationId: updateStockItem
+      description: 'Update an existing stock item'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Stock item updated successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Stock Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Item name'
+                  example: sed
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Item description'
+                  example: 'Maiores aut veritatis voluptate harum.'
+                  nullable: true
+                sku:
+                  type: string
+                  description: 'Unique SKU'
+                  example: et
+                  nullable: false
+                category_id:
+                  type: integer
+                  description: 'Category ID'
+                  example: 3
+                  nullable: false
+                unit:
+                  type: string
+                  description: 'Unit of measurement'
+                  example: ipsam
+                  nullable: false
+                minimum_quantity:
+                  type: numeric
+                  description: 'Minimum stock level'
+                  example: exercitationem
+                  nullable: true
+                unit_cost:
+                  type: numeric
+                  description: 'Unit cost'
+                  example: et
+                  nullable: true
+                expiry_date:
+                  type: date
+                  description: 'Expiry date'
+                  example: facere
+                  nullable: true
+                supplier:
+                  type: string
+                  description: 'Supplier name'
+                  example: earum
+                  nullable: true
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: aperiam
+                  nullable: true
+    delete:
+      summary: 'Delete Stock Item'
+      operationId: deleteStockItem
+      description: 'Delete a stock item'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Stock item deleted successfully'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Stock item deleted successfully'
+      tags:
+        - 'Stock Management'
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Stock item ID'
+        example: 9
+        required: true
+        schema:
+          type: integer
+  /api/stock/movements:
+    post:
+      summary: 'Record Stock Movement'
+      operationId: recordStockMovement
+      description: 'Record a stock movement (in/out/adjustment)'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Stock movement recorded successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Stock Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                stock_item_id:
+                  type: integer
+                  description: 'Stock item ID'
+                  example: 19
+                  nullable: false
+                type:
+                  type: string
+                  description: 'Movement type (in/out/adjustment)'
+                  example: quo
+                  nullable: false
+                quantity:
+                  type: numeric
+                  description: 'Movement quantity'
+                  example: aut
+                  nullable: false
+                unit_cost:
+                  type: numeric
+                  description: 'Unit cost for this movement'
+                  example: et
+                  nullable: true
+                reason:
+                  type: string
+                  description: 'Reason for movement'
+                  example: ex
+                  nullable: true
+                movement_date:
+                  type: date
+                  description: 'Movement date'
+                  example: voluptatem
+                  nullable: true
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: quo
+                  nullable: true
+              required:
+                - stock_item_id
+                - type
+                - quantity
+  /api/tasks:
+    get:
+      summary: 'Get Tasks'
+      operationId: getTasks
+      description: 'Retrieve a paginated list of tasks'
+      parameters:
+        -
+          in: query
+          name: type
+          description: 'Filter by task type (agricultural, livestock, maintenance, administrative)'
+          example: itaque
+          required: false
+          schema:
+            type: string
+            description: 'Filter by task type (agricultural, livestock, maintenance, administrative)'
+            example: itaque
+            nullable: false
+        -
+          in: query
+          name: status
+          description: 'Filter by status (pending, in_progress, completed, cancelled)'
+          example: ipsa
+          required: false
+          schema:
+            type: string
+            description: 'Filter by status (pending, in_progress, completed, cancelled)'
+            example: ipsa
+            nullable: false
+        -
+          in: query
+          name: priority
+          description: 'Filter by priority (low, medium, high, urgent)'
+          example: laudantium
+          required: false
+          schema:
+            type: string
+            description: 'Filter by priority (low, medium, high, urgent)'
+            example: laudantium
+            nullable: false
+        -
+          in: query
+          name: assigned_to
+          description: 'Filter by assigned user ID'
+          example: 3
+          required: false
+          schema:
+            type: integer
+            description: 'Filter by assigned user ID'
+            example: 3
+            nullable: false
+        -
+          in: query
+          name: zone_id
+          description: 'Filter by zone ID'
+          example: 15
+          required: false
+          schema:
+            type: integer
+            description: 'Filter by zone ID'
+            example: 15
+            nullable: false
+        -
+          in: query
+          name: search
+          description: 'Search in title and description'
+          example: et
+          required: false
+          schema:
+            type: string
+            description: 'Search in title and description'
+            example: et
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"tasks\": [...],\n    \"pagination\": {...}\n  }\n}"
+      tags:
+        - 'Task Management'
+    post:
+      summary: 'Create Task'
+      operationId: createTask
+      description: 'Create a new task'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Task created successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Task Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'Task title'
+                  example: error
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Task description'
+                  example: 'Unde eum est rerum velit qui et.'
+                  nullable: false
+                type:
+                  type: string
+                  description: 'Task type (agricultural, livestock, maintenance, administrative)'
+                  example: laudantium
+                  nullable: false
+                priority:
+                  type: string
+                  description: 'Task priority (low, medium, high, urgent)'
+                  example: voluptatem
+                  nullable: true
+                due_date:
+                  type: date
+                  description: 'Due date'
+                  example: autem
+                  nullable: false
+                assigned_to:
+                  type: integer
+                  description: 'Assigned user ID'
+                  example: 10
+                  nullable: false
+                zone_id:
+                  type: integer
+                  description: 'Zone ID'
+                  example: 7
+                  nullable: true
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: perferendis
+                  nullable: true
+              required:
+                - title
+                - description
+                - type
+                - due_date
+                - assigned_to
+  '/api/tasks/{id}':
+    get:
+      summary: 'Get Task Details'
+      operationId: getTaskDetails
+      description: 'Retrieve a specific task'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Task Management'
+    put:
+      summary: 'Update Task'
+      operationId: updateTask
+      description: 'Update an existing task'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Task updated successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Task Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'Task title'
+                  example: similique
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Task description'
+                  example: 'Voluptatem consectetur et ut quae reprehenderit accusamus explicabo.'
+                  nullable: false
+                type:
+                  type: string
+                  description: 'Task type'
+                  example: illum
+                  nullable: false
+                priority:
+                  type: string
+                  description: 'Task priority'
+                  example: velit
+                  nullable: true
+                status:
+                  type: string
+                  description: 'Task status'
+                  example: exercitationem
+                  nullable: false
+                due_date:
+                  type: date
+                  description: 'Due date'
+                  example: at
+                  nullable: false
+                assigned_to:
+                  type: integer
+                  description: 'Assigned user ID'
+                  example: 1
+                  nullable: false
+                zone_id:
+                  type: integer
+                  description: 'Zone ID'
+                  example: 19
+                  nullable: true
+                notes:
+                  type: string
+                  description: 'Additional notes'
+                  example: ipsa
+                  nullable: true
+    delete:
+      summary: 'Delete Task'
+      operationId: deleteTask
+      description: 'Delete a task'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Task deleted successfully'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Task deleted successfully'
+      tags:
+        - 'Task Management'
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Task ID'
+        example: 20
+        required: true
+        schema:
+          type: integer
+  /api/my-tasks:
+    get:
+      summary: 'Get My Tasks'
+      operationId: getMyTasks
+      description: 'Get tasks assigned to the authenticated user'
+      parameters:
+        -
+          in: query
+          name: status
+          description: 'Filter by status'
+          example: incidunt
+          required: false
+          schema:
+            type: string
+            description: 'Filter by status'
+            example: incidunt
+            nullable: false
+        -
+          in: query
+          name: type
+          description: 'Filter by type'
+          example: fugit
+          required: false
+          schema:
+            type: string
+            description: 'Filter by type'
+            example: fugit
+            nullable: false
+        -
+          in: query
+          name: overdue
+          description: 'Filter overdue tasks'
+          example: false
+          required: false
+          schema:
+            type: boolean
+            description: 'Filter overdue tasks'
+            example: false
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"tasks\": [...],\n    \"pagination\": {...}\n  }\n}"
+      tags:
+        - 'Task Management'
+  '/api/tasks/{id}/complete':
+    put:
+      summary: 'Complete Task'
+      operationId: completeTask
+      description: 'Mark a task as completed'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Task completed successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Task Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                notes:
+                  type: string
+                  description: 'Completion notes'
+                  example: aliquam
+                  nullable: false
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Task ID'
+        example: 12
+        required: true
+        schema:
+          type: integer
+  /api/users:
+    get:
+      summary: 'Get Users'
+      operationId: getUsers
+      description: 'Retrieve a paginated list of users'
+      parameters:
+        -
+          in: query
+          name: search
+          description: 'Search in name and email'
+          example: quo
+          required: false
+          schema:
+            type: string
+            description: 'Search in name and email'
+            example: quo
+            nullable: false
+        -
+          in: query
+          name: role
+          description: 'Filter by role'
+          example: minus
+          required: false
+          schema:
+            type: string
+            description: 'Filter by role'
+            example: minus
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"users\": [...],\n    \"pagination\": {...}\n  }\n}"
+      tags:
+        - 'User Management'
+    post:
+      summary: 'Create User'
+      operationId: createUser
+      description: 'Create a new user'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"User created successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'User Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'User name'
+                  example: qui
+                  nullable: false
+                email:
+                  type: string
+                  description: 'User email'
+                  example: genoveva64@example.org
+                  nullable: false
+                password:
+                  type: string
+                  description: 'User password'
+                  example: '~ob))p8_W_kP2S?U'
+                  nullable: false
+                roles:
+                  type: array
+                  description: 'Array of role names'
+                  example:
+                    - voluptatum
+                  items:
+                    type: string
+              required:
+                - name
+                - email
+                - password
+  '/api/users/{id}':
+    get:
+      summary: 'Get User Details'
+      operationId: getUserDetails
+      description: 'Retrieve a specific user'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {...}\n}"
+      tags:
+        - 'User Management'
+    put:
+      summary: 'Update User'
+      operationId: updateUser
+      description: 'Update an existing user'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"User updated successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'User Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'User name'
+                  example: cumque
+                  nullable: false
+                email:
+                  type: string
+                  description: 'User email'
+                  example: wbarton@example.net
+                  nullable: false
+                password:
+                  type: string
+                  description: 'New password'
+                  example: "07*9/t{'"
+                  nullable: true
+                roles:
+                  type: array
+                  description: 'Array of role names'
+                  example:
+                    - fugiat
+                  items:
+                    type: string
+    delete:
+      summary: 'Delete User'
+      operationId: deleteUser
+      description: 'Delete a user'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'User deleted successfully'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'User deleted successfully'
+      tags:
+        - 'User Management'
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'User ID'
+        example: 7
+        required: true
+        schema:
+          type: integer
+  /api/roles:
+    get:
+      summary: 'Get Available Roles'
+      operationId: getAvailableRoles
+      description: 'Get all available roles'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": [...]\n}"
+      tags:
+        - 'User Management'
+  /api/permissions:
+    get:
+      summary: 'Get Available Permissions'
+      operationId: getAvailablePermissions
+      description: 'Get all available permissions'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": [...]\n}"
+      tags:
+        - 'User Management'
+  /api/zones:
+    get:
+      summary: 'Get Zones'
+      operationId: getZones
+      description: 'Retrieve a paginated list of zones'
+      parameters:
+        -
+          in: query
+          name: type
+          description: 'Filter by zone type (cultivation, pasture, enclosure, building, water_point)'
+          example: repellendus
+          required: false
+          schema:
+            type: string
+            description: 'Filter by zone type (cultivation, pasture, enclosure, building, water_point)'
+            example: repellendus
+            nullable: false
+        -
+          in: query
+          name: status
+          description: 'Filter by status (active, inactive, maintenance)'
+          example: dolores
+          required: false
+          schema:
+            type: string
+            description: 'Filter by status (active, inactive, maintenance)'
+            example: dolores
+            nullable: false
+        -
+          in: query
+          name: search
+          description: 'Search in name and description'
+          example: totam
+          required: false
+          schema:
+            type: string
+            description: 'Search in name and description'
+            example: totam
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"zones\": [...],\n    \"pagination\": {...}\n  }\n}"
+      tags:
+        - 'Zone Management'
+    post:
+      summary: 'Create Zone'
+      operationId: createZone
+      description: 'Create a new zone'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Zone created successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Zone Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Zone name'
+                  example: est
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Zone description'
+                  example: 'Eveniet unde vero et hic quod nisi nostrum illum.'
+                  nullable: true
+                type:
+                  type: string
+                  description: 'Zone type (cultivation, pasture, enclosure, building, water_point)'
+                  example: voluptatibus
+                  nullable: false
+                coordinates:
+                  type: json
+                  description: 'GeoJSON coordinates'
+                  example: consequatur
+                  nullable: false
+                area:
+                  type: numeric
+                  description: 'Zone area in square meters'
+                  example: veritatis
+                  nullable: true
+                status:
+                  type: string
+                  description: 'Zone status (active, inactive, maintenance)'
+                  example: est
+                  nullable: true
+              required:
+                - name
+                - type
+                - coordinates
+  '/api/zones/{id}':
+    get:
+      summary: 'Get Zone Details'
+      operationId: getZoneDetails
+      description: 'Retrieve a specific zone with its associated data'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Zone Management'
+    put:
+      summary: 'Update Zone'
+      operationId: updateZone
+      description: 'Update an existing zone'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Zone updated successfully\",\n  \"data\": {...}\n}"
+      tags:
+        - 'Zone Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Zone name'
+                  example: dolorem
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Zone description'
+                  example: 'Ea et assumenda nihil ratione nulla molestiae omnis odit.'
+                  nullable: true
+                type:
+                  type: string
+                  description: 'Zone type'
+                  example: iusto
+                  nullable: false
+                coordinates:
+                  type: json
+                  description: 'GeoJSON coordinates'
+                  example: nobis
+                  nullable: false
+                area:
+                  type: numeric
+                  description: 'Zone area in square meters'
+                  example: nobis
+                  nullable: true
+                status:
+                  type: string
+                  description: 'Zone status'
+                  example: et
+                  nullable: false
+    delete:
+      summary: 'Delete Zone'
+      operationId: deleteZone
+      description: 'Delete a zone'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Zone deleted successfully'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Zone deleted successfully'
+      tags:
+        - 'Zone Management'
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Zone ID'
+        example: 14
+        required: true
+        schema:
+          type: integer
+  '/api/zones/{id}/statistics':
+    get:
+      summary: 'Get Zone Statistics'
+      operationId: getZoneStatistics
+      description: 'Get statistics for a specific zone'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"data\": {\n    \"zone\": {...},\n    \"statistics\": {\n      \"poultry_count\": 0,\n      \"cattle_count\": 0,\n      \"crops_count\": 0,\n      \"active_tasks\": 0\n    }\n  }\n}"
+      tags:
+        - 'Zone Management'
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Zone ID'
+        example: 6
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Analytics
+    description: ''
+  -
+    name: Authentication
+    description: "\nAPIs for user authentication and management"
+  -
+    name: 'Cattle Management'
+    description: "\nAPIs for managing cattle and their records"
+  -
+    name: 'Crop Management'
+    description: "\nAPIs for managing crops and agricultural activities"
+  -
+    name: Dashboard
+    description: "\nAPIs for dashboard data and KPIs"
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: 'Gestion Financière'
+    description: ''
+  -
+    name: 'Gestion Vétérinaire'
+    description: ''
+  -
+    name: 'Health Check'
+    description: "\nAPIs for system health monitoring"
+  -
+    name: 'Poultry Management'
+    description: "\nAPIs for managing poultry flocks, records, and incubation"
+  -
+    name: Reports
+    description: "\nAPIs for generating reports and analytics"
+  -
+    name: 'Stock Categories'
+    description: "\nAPIs for managing stock categories"
+  -
+    name: 'Stock Management'
+    description: "\nAPIs for managing stock items and movements"
+  -
+    name: 'Task Management'
+    description: "\nAPIs for managing tasks and work assignments"
+  -
+    name: 'User Management'
+    description: "\nAPIs for managing users and roles"
+  -
+    name: 'Zone Management'
+    description: "\nAPIs for managing farm zones and cartography"
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.'
+security:
+  -
+    default: []

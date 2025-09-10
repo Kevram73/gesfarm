@@ -1,0 +1,684 @@
+name: 'Stock Management'
+description: |-
+
+  APIs for managing stock items and movements
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/stock/items
+    metadata:
+      groupName: 'Stock Management'
+      groupDescription: |-
+
+        APIs for managing stock items and movements
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Stock Items'
+      description: 'Retrieve a paginated list of stock items with optional filtering'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      category_id:
+        name: category_id
+        description: 'Filter by category ID'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      type:
+        name: type
+        description: 'Filter by item type'
+        required: false
+        example: ex
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      search:
+        name: search
+        description: 'Search in name and description'
+        required: false
+        example: ipsum
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      low_stock:
+        name: low_stock
+        description: 'Filter items with low stock'
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      expired:
+        name: expired
+        description: 'Filter expired items'
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      category_id: 1
+      type: ex
+      search: ipsum
+      low_stock: false
+      expired: false
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "data": {
+              "items": [...],
+              "pagination": {...}
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer gvfd56bZaV3hDP8146ekEca'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/stock/items
+    metadata:
+      groupName: 'Stock Management'
+      groupDescription: |-
+
+        APIs for managing stock items and movements
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create Stock Item'
+      description: 'Create a new stock item'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Item name'
+        required: true
+        example: ea
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: 'Item description'
+        required: false
+        example: 'Cumque debitis voluptates deserunt eaque.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      sku:
+        name: sku
+        description: 'Unique SKU'
+        required: true
+        example: voluptas
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      category_id:
+        name: category_id
+        description: 'Category ID'
+        required: true
+        example: 8
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      unit:
+        name: unit
+        description: 'Unit of measurement'
+        required: true
+        example: corrupti
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      current_quantity:
+        name: current_quantity
+        description: 'Initial quantity'
+        required: false
+        example: quis
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      minimum_quantity:
+        name: minimum_quantity
+        description: 'Minimum stock level'
+        required: false
+        example: commodi
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      unit_cost:
+        name: unit_cost
+        description: 'Unit cost'
+        required: false
+        example: alias
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      expiry_date:
+        name: expiry_date
+        description: 'Expiry date'
+        required: false
+        example: impedit
+        type: date
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      supplier:
+        name: supplier
+        description: 'Supplier name'
+        required: false
+        example: doloribus
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      notes:
+        name: notes
+        description: 'Additional notes'
+        required: false
+        example: rerum
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: ea
+      description: 'Cumque debitis voluptates deserunt eaque.'
+      sku: voluptas
+      category_id: 8
+      unit: corrupti
+      current_quantity: quis
+      minimum_quantity: commodi
+      unit_cost: alias
+      expiry_date: impedit
+      supplier: doloribus
+      notes: rerum
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "status": "success",
+            "message": "Stock item created successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer af1d4baZ5k8ceE3vDP66Vhg'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/stock/items/{id}'
+    metadata:
+      groupName: 'Stock Management'
+      groupDescription: |-
+
+        APIs for managing stock items and movements
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Stock Item'
+      description: 'Retrieve a specific stock item with its movements'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'Stock item ID'
+        required: true
+        example: 9
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 9
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 4hk6feVdZc1gEPa8D3vb65a'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/stock/items/{id}'
+    metadata:
+      groupName: 'Stock Management'
+      groupDescription: |-
+
+        APIs for managing stock items and movements
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update Stock Item'
+      description: 'Update an existing stock item'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'Stock item ID'
+        required: true
+        example: 7
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 7
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Item name'
+        required: false
+        example: sed
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: 'Item description'
+        required: false
+        example: 'Maiores aut veritatis voluptate harum.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      sku:
+        name: sku
+        description: 'Unique SKU'
+        required: false
+        example: et
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      category_id:
+        name: category_id
+        description: 'Category ID'
+        required: false
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      unit:
+        name: unit
+        description: 'Unit of measurement'
+        required: false
+        example: ipsam
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      minimum_quantity:
+        name: minimum_quantity
+        description: 'Minimum stock level'
+        required: false
+        example: exercitationem
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      unit_cost:
+        name: unit_cost
+        description: 'Unit cost'
+        required: false
+        example: et
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      expiry_date:
+        name: expiry_date
+        description: 'Expiry date'
+        required: false
+        example: facere
+        type: date
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      supplier:
+        name: supplier
+        description: 'Supplier name'
+        required: false
+        example: earum
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      notes:
+        name: notes
+        description: 'Additional notes'
+        required: false
+        example: aperiam
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: sed
+      description: 'Maiores aut veritatis voluptate harum.'
+      sku: et
+      category_id: 3
+      unit: ipsam
+      minimum_quantity: exercitationem
+      unit_cost: et
+      expiry_date: facere
+      supplier: earum
+      notes: aperiam
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "message": "Stock item updated successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer PdEefaDZv1kb4ah6g65c38V'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/stock/items/{id}'
+    metadata:
+      groupName: 'Stock Management'
+      groupDescription: |-
+
+        APIs for managing stock items and movements
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete Stock Item'
+      description: 'Delete a stock item'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'Stock item ID'
+        required: true
+        example: 19
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 19
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "message": "Stock item deleted successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer da5g6ZeE46caf8vkb1PD3hV'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/stock/movements
+    metadata:
+      groupName: 'Stock Management'
+      groupDescription: |-
+
+        APIs for managing stock items and movements
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Record Stock Movement'
+      description: 'Record a stock movement (in/out/adjustment)'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      stock_item_id:
+        name: stock_item_id
+        description: 'Stock item ID'
+        required: true
+        example: 19
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      type:
+        name: type
+        description: 'Movement type (in/out/adjustment)'
+        required: true
+        example: quo
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      quantity:
+        name: quantity
+        description: 'Movement quantity'
+        required: true
+        example: aut
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      unit_cost:
+        name: unit_cost
+        description: 'Unit cost for this movement'
+        required: false
+        example: et
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      reason:
+        name: reason
+        description: 'Reason for movement'
+        required: false
+        example: ex
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      movement_date:
+        name: movement_date
+        description: 'Movement date'
+        required: false
+        example: voluptatem
+        type: date
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      notes:
+        name: notes
+        description: 'Additional notes'
+        required: false
+        example: quo
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      stock_item_id: 19
+      type: quo
+      quantity: aut
+      unit_cost: et
+      reason: ex
+      movement_date: voluptatem
+      notes: quo
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "status": "success",
+            "message": "Stock movement recorded successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 4hV8EaacbP31de6ZgDf6k5v'
+    controller: null
+    method: null
+    route: null
+    custom: []

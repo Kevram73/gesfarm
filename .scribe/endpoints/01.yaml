@@ -1,0 +1,109 @@
+name: 'Health Check'
+description: |-
+
+  APIs for system health monitoring
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/health
+    metadata:
+      groupName: 'Health Check'
+      groupDescription: |-
+
+        APIs for system health monitoring
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Health Check'
+      description: 'Check the health status of the API and database'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "healthy",
+            "timestamp": "2024-01-20T10:30:00Z",
+            "services": {
+              "database": "connected",
+              "cache": "connected"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer d6815fgeakV4ZvP6DhEcb3a'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/info
+    metadata:
+      groupName: 'Health Check'
+      groupDescription: |-
+
+        APIs for system health monitoring
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'System Info'
+      description: 'Get system information and statistics'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "data": {
+              "version": "1.0.0",
+              "environment": "production",
+              "php_version": "8.1.0",
+              "laravel_version": "10.0.0",
+              "database_size": "15.2 MB",
+              "total_users": 5,
+              "total_records": 1250
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer avkV51a3D8fbdghZPE64ec6'
+    controller: null
+    method: null
+    route: null
+    custom: []
