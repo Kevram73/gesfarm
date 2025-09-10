@@ -1,7 +1,7 @@
-# Utiliser l'image PHP 8.2 avec FPM
+# Dockerfile simplifié pour GESFARM
 FROM php:8.2-fpm
 
-# Installer les dépendances système
+# Installer les dépendances système essentielles
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -14,23 +14,18 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libgd-dev \
-    jpegoptim \
-    optipng \
-    pngquant \
-    gifsicle \
     vim \
     && rm -rf /var/lib/apt/lists/*
 
-# Installer les extensions PHP nécessaires
+# Installer les extensions PHP
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath zip \
-    && docker-php-ext-install opcache
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath zip opcache
 
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Installer Node.js et npm
+# Installer Node.js (version stable)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
@@ -42,7 +37,7 @@ RUN groupadd -g 1000 www \
 # Copier les fichiers de l'application
 COPY . /var/www
 
-# Copier la configuration PHP personnalisée
+# Copier la configuration PHP
 COPY docker/php/local.ini /usr/local/etc/php/conf.d/local.ini
 
 # Copier le script de démarrage
@@ -61,12 +56,12 @@ USER www
 WORKDIR /var/www
 
 # Installer les dépendances PHP
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # Installer les dépendances Node.js et compiler les assets
-RUN npm install && npm run build
+RUN npm install --production && npm run build
 
-# Exposer le port 9000 pour PHP-FPM
+# Exposer le port
 EXPOSE 9000
 
 CMD ["/usr/local/bin/start.sh"]
