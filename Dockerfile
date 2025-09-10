@@ -69,8 +69,17 @@ RUN mkdir -p storage bootstrap/cache vendor \
 # Installer les dépendances PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Installer les dépendances Node.js et compiler les assets
-RUN npm ci --only=production && npm run build
+# Installer les dépendances Node.js (avec vérification du package-lock.json)
+RUN if [ -f package-lock.json ]; then \
+        npm ci --omit=dev; \
+    else \
+        npm install --omit=dev; \
+    fi
+
+# Compiler les assets (seulement si un script build existe)
+RUN if [ -f package.json ] && grep -q '"build"' package.json; then \
+        npm run build; \
+    fi
 
 # Exposer le port 9000 pour PHP-FPM
 EXPOSE 9000
