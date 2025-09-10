@@ -6,14 +6,14 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     libpng-dev \
-    liboniguruma-dev \
+    libonig-dev \
     libxml2-dev \
     libzip-dev \
     zip \
     unzip \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libgd-dev \
+    libwebp-dev \
     jpegoptim \
     optipng \
     pngquant \
@@ -22,36 +22,38 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Installer les extensions PHP nécessaires
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath zip \
-    && docker-php-ext-install opcache
+    pdo_mysql \
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    zip \
+    opcache
 
-# Installer Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Installer Node.js et npm
+# Installer Node.js et npm (méthode plus stable)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
+
+# Installer Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Créer un utilisateur non-root
 RUN groupadd -g 1000 www \
     && useradd -u 1000 -ms /bin/bash -g www www
 
-# Copier les fichiers de l'application
-COPY . /var/www
-
-# Copier la configuration PHP personnalisée
+# Copier les fichiers de configuration
 COPY docker/php/local.ini /usr/local/etc/php/conf.d/local.ini
-
-# Copier le script de démarrage
 COPY docker/php/start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
 
+# Copier les fichiers de l'application
+COPY --chown=www:www . /var/www
+
 # Définir les permissions
-RUN chown -R www:www /var/www \
-    && chmod -R 755 /var/www/storage \
+RUN chmod -R 755 /var/www/storage \
     && chmod -R 755 /var/www/bootstrap/cache
 
 # Passer à l'utilisateur www
@@ -61,10 +63,10 @@ USER www
 WORKDIR /var/www
 
 # Installer les dépendances PHP
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # Installer les dépendances Node.js et compiler les assets
-RUN npm install && npm run build
+RUN npm ci --only=production && npm run build
 
 # Exposer le port 9000 pour PHP-FPM
 EXPOSE 9000
