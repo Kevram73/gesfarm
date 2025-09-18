@@ -254,4 +254,44 @@ class CattleController extends Controller
             'data' => $record->load(['cattle', 'recordedBy'])
         ], 201);
     }
+
+    /**
+     * Delete Cattle
+     * 
+     * Delete a cattle record
+     * 
+     * @urlParam cattle integer required Cattle ID
+     * 
+     * @response 200 {
+     *   "status": "success",
+     *   "message": "Cattle deleted successfully"
+     * }
+     * 
+     * @response 404 {
+     *   "status": "error",
+     *   "message": "Cattle not found"
+     * }
+     */
+    public function destroy($id)
+    {
+        $cattle = Cattle::find($id);
+
+        if (!$cattle) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Cattle not found'
+            ], 404);
+        }
+
+        // Delete associated records first
+        $cattle->records()->delete();
+        
+        // Delete the cattle
+        $cattle->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Cattle deleted successfully'
+        ], 200);
+    }
 }
