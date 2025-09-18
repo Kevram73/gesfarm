@@ -103,16 +103,27 @@ Route::middleware('auth:sanctum')->group(function () {
     
     // Financial management routes
     Route::prefix('financial')->group(function () {
+        // Transactions
         Route::get('/transactions', [FinancialController::class, 'getTransactions']);
         Route::post('/transactions', [FinancialController::class, 'createTransaction']);
-        Route::get('/transactions/{transaction}', [FinancialController::class, 'getTransaction']);
-        Route::put('/transactions/{transaction}', [FinancialController::class, 'updateTransaction']);
-        Route::delete('/transactions/{transaction}', [FinancialController::class, 'deleteTransaction']);
+        Route::put('/transactions/{id}', [FinancialController::class, 'updateTransaction']);
+        Route::delete('/transactions/{id}', [FinancialController::class, 'deleteTransaction']);
         
+        // Budgets
         Route::get('/budgets', [FinancialController::class, 'getBudgets']);
         Route::post('/budgets', [FinancialController::class, 'createBudget']);
+        Route::put('/budgets/{id}', [FinancialController::class, 'updateBudget']);
+        Route::delete('/budgets/{id}', [FinancialController::class, 'deleteBudget']);
         
-        Route::get('/reports', [FinancialController::class, 'getFinancialReports']);
+        // Summary and Analytics
+        Route::get('/summary', [FinancialController::class, 'getSummary']);
+        Route::get('/alerts', [FinancialController::class, 'getAlerts']);
+        Route::put('/alerts/{id}/read', [FinancialController::class, 'markAlertAsRead']);
+        Route::get('/categories', [FinancialController::class, 'getCategories']);
+        
+        // Import/Export
+        Route::get('/export', [FinancialController::class, 'exportData']);
+        Route::post('/import', [FinancialController::class, 'importData']);
     });
     
     // Veterinary management routes
