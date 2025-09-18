@@ -26,6 +26,8 @@ return [
         'http://127.0.0.1:3001',
         'http://62.171.181.213:3000',
         'https://62.171.181.213:3000',
+        'http://62.171.181.213',
+        'https://62.171.181.213',
         // Ajoutez votre domaine de production ici
         // 'https://votre-domaine.com',
         // 'https://www.votre-domaine.com',
@@ -34,7 +36,7 @@ return [
     'allowed_origins_patterns' => [
         '/^https?:\/\/localhost:\d+$/',
         '/^https?:\/\/127\.0\.0\.1:\d+$/',
-        '/^https?:\/\/62\.171\.181\.213:\d+$/',
+        '/^https?:\/\/62\.171\.181\.213(:\d+)?$/',
         // Pattern pour les sous-domaines de production
         // '/^https?:\/\/.*\.votre-domaine\.com$/',
     ],

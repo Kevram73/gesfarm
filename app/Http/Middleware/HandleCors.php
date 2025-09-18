@@ -15,24 +15,30 @@ class HandleCors
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $origin = $this->getAllowedOrigin($request);
+        
         // Gérer les requêtes preflight OPTIONS
         if ($request->isMethod('OPTIONS')) {
             return response('', 200)
-                ->header('Access-Control-Allow-Origin', $this->getAllowedOrigin($request))
+                ->header('Access-Control-Allow-Origin', $origin)
                 ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
-                ->header('Access-Control-Allow-Headers', 'Accept, Authorization, Content-Type, X-Requested-With, X-CSRF-TOKEN, X-XSRF-TOKEN, Origin')
+                ->header('Access-Control-Allow-Headers', 'Accept, Authorization, Content-Type, X-Requested-With, X-CSRF-TOKEN, X-XSRF-TOKEN, Origin, Access-Control-Request-Method, Access-Control-Request-Headers')
                 ->header('Access-Control-Allow-Credentials', 'true')
-                ->header('Access-Control-Max-Age', '86400');
+                ->header('Access-Control-Max-Age', '86400')
+                ->header('Vary', 'Origin');
         }
 
         $response = $next($request);
 
-        // Ajouter les headers CORS à la réponse
-        $response->headers->set('Access-Control-Allow-Origin', $this->getAllowedOrigin($request));
-        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-        $response->headers->set('Access-Control-Allow-Headers', 'Accept, Authorization, Content-Type, X-Requested-With, X-CSRF-TOKEN, X-XSRF-TOKEN, Origin');
-        $response->headers->set('Access-Control-Allow-Credentials', 'true');
-        $response->headers->set('Access-Control-Expose-Headers', 'Cache-Control, Content-Language, Content-Type, Expires, Last-Modified, Pragma');
+        // Ajouter les headers CORS à la réponse seulement si l'origine est autorisée
+        if ($origin) {
+            $response->headers->set('Access-Control-Allow-Origin', $origin);
+            $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+            $response->headers->set('Access-Control-Allow-Headers', 'Accept, Authorization, Content-Type, X-Requested-With, X-CSRF-TOKEN, X-XSRF-TOKEN, Origin, Access-Control-Request-Method, Access-Control-Request-Headers');
+            $response->headers->set('Access-Control-Allow-Credentials', 'true');
+            $response->headers->set('Access-Control-Expose-Headers', 'Cache-Control, Content-Language, Content-Type, Expires, Last-Modified, Pragma');
+            $response->headers->set('Vary', 'Origin');
+        }
 
         return $response;
     }
@@ -52,6 +58,8 @@ class HandleCors
             'http://127.0.0.1:3001',
             'http://62.171.181.213:3000',
             'https://62.171.181.213:3000',
+            'http://62.171.181.213',
+            'https://62.171.181.213',
         ];
 
         // Ajouter les origines de production si configurées
@@ -68,10 +76,10 @@ class HandleCors
             return $origin;
         }
 
-        // Pour le développement, autoriser localhost et l'IP serveur avec n'importe quel port
+        // Pour le développement, autoriser localhost et l'IP serveur avec ou sans port
         if (config('app.env') === 'local' && $origin && (
             preg_match('/^https?:\/\/localhost:\d+$/', $origin) ||
-            preg_match('/^https?:\/\/62\.171\.181\.213:\d+$/', $origin)
+            preg_match('/^https?:\/\/62\.171\.181\.213(:\d+)?$/', $origin)
         )) {
             return $origin;
         }
