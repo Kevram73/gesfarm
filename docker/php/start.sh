@@ -20,9 +20,9 @@ if [ ! -f .env ]; then
 fi
 
 # Installer les dépendances si nécessaire
-if [ ! -d vendor ]; then
+if [ ! -d vendor ] || [ ! -f vendor/autoload.php ]; then
     echo "📦 Installation des dépendances Composer..."
-    composer install --no-dev --optimize-autoloader
+    composer install --no-dev --optimize-autoloader --no-interaction
 fi
 
 # Installer les dépendances Node.js si nécessaire

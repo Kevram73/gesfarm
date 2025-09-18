@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     pngquant \
     gifsicle \
     vim \
+    default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
 # Installer les extensions PHP nécessaires
@@ -46,7 +47,8 @@ RUN mkdir -p /var/www \
 # Copier les fichiers de configuration
 COPY docker/php/local.ini /usr/local/etc/php/conf.d/local.ini
 COPY docker/php/start.sh /usr/local/bin/start.sh
-RUN chmod +x /usr/local/bin/start.sh
+COPY docker/php/start-queue.sh /usr/local/bin/start-queue.sh
+RUN chmod +x /usr/local/bin/start.sh /usr/local/bin/start-queue.sh
 
 # Passer à l'utilisateur www
 USER www

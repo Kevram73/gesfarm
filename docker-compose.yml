@@ -108,13 +108,14 @@ services:
     networks:
       - gesfarm_network
     depends_on:
+      - app
       - db
       - redis
     command: >
-      sh -c "while true; do
+      sh -c "/usr/local/bin/start-queue.sh bash -c 'while true; do
         php artisan schedule:run
         sleep 60
-      done"
+      done'"
 
   # Service Queue Worker (pour les tâches en arrière-plan)
   queue:
@@ -129,9 +130,10 @@ services:
     networks:
       - gesfarm_network
     depends_on:
+      - app
       - db
       - redis
-    command: php artisan queue:work --verbose --tries=3 --timeout=90
+    command: /usr/local/bin/start-queue.sh php artisan queue:work --verbose --tries=3 --timeout=90
 
 networks:
   gesfarm_network:
