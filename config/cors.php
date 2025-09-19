@@ -28,18 +28,9 @@ return [
         'https://62.171.181.213:3000',
         'http://62.171.181.213',
         'https://62.171.181.213',
-        // Ajoutez votre domaine de production ici
-        // 'https://votre-domaine.com',
-        // 'https://www.votre-domaine.com',
     ],
 
-    'allowed_origins_patterns' => [
-        '/^https?:\/\/localhost:\d+$/',
-        '/^https?:\/\/127\.0\.0\.1:\d+$/',
-        '/^https?:\/\/62\.171\.181\.213(:\d+)?$/',
-        // Pattern pour les sous-domaines de production
-        // '/^https?:\/\/.*\.votre-domaine\.com$/',
-    ],
+    'allowed_origins_patterns' => [],
 
     'allowed_headers' => [
         'Accept',
@@ -53,14 +44,7 @@ return [
         'Access-Control-Request-Headers',
     ],
 
-    'exposed_headers' => [
-        'Cache-Control',
-        'Content-Language',
-        'Content-Type',
-        'Expires',
-        'Last-Modified',
-        'Pragma',
-    ],
+    'exposed_headers' => [],
 
     'max_age' => 86400, // 24 heures
 
