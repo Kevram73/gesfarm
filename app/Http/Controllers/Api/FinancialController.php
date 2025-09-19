@@ -273,4 +273,286 @@ class FinancialController extends Controller
             ]
         ]);
     }
+
+    /**
+     * @group Gestion Financière
+     * 
+     * Récupérer le résumé financier
+     */
+    public function getSummary(Request $request): JsonResponse
+    {
+        $period = $request->get('period', 'month');
+        $startDate = $request->get('start_date');
+        $endDate = $request->get('end_date');
+
+        // Définir les dates selon la période
+        switch ($period) {
+            case 'year':
+                $startDate = $startDate ?: now()->startOfYear();
+                $endDate = $endDate ?: now()->endOfYear();
+                break;
+            case 'quarter':
+                $startDate = $startDate ?: now()->startOfQuarter();
+                $endDate = $endDate ?: now()->endOfQuarter();
+                break;
+            case 'month':
+            default:
+                $startDate = $startDate ?: now()->startOfMonth();
+                $endDate = $endDate ?: now()->endOfMonth();
+                break;
+        }
+
+        // Calculs des totaux
+        $totalIncome = Transaction::where('type', 'income')
+            ->whereBetween('transaction_date', [$startDate, $endDate])
+            ->sum('amount');
+
+        $totalExpenses = Transaction::where('type', 'expense')
+            ->whereBetween('transaction_date', [$startDate, $endDate])
+            ->sum('amount');
+
+        $netProfit = $totalIncome - $totalExpenses;
+        $profitMargin = $totalIncome > 0 ? ($netProfit / $totalIncome) * 100 : 0;
+
+        // Données mensuelles
+        $monthlyIncome = Transaction::where('type', 'income')
+            ->whereMonth('transaction_date', now()->month)
+            ->whereYear('transaction_date', now()->year)
+            ->sum('amount');
+
+        $monthlyExpenses = Transaction::where('type', 'expense')
+            ->whereMonth('transaction_date', now()->month)
+            ->whereYear('transaction_date', now()->year)
+            ->sum('amount');
+
+        $monthlyProfit = $monthlyIncome - $monthlyExpenses;
+
+        // Données annuelles
+        $yearlyIncome = Transaction::where('type', 'income')
+            ->whereYear('transaction_date', now()->year)
+            ->sum('amount');
+
+        $yearlyExpenses = Transaction::where('type', 'expense')
+            ->whereYear('transaction_date', now()->year)
+            ->sum('amount');
+
+        $yearlyProfit = $yearlyIncome - $yearlyExpenses;
+
+        // Top catégories de revenus
+        $topIncomeCategories = Transaction::where('type', 'income')
+            ->whereBetween('transaction_date', [$startDate, $endDate])
+            ->select('category', DB::raw('SUM(amount) as total'))
+            ->groupBy('category')
+            ->orderBy('total', 'desc')
+            ->limit(5)
+            ->get()
+            ->map(function ($item) use ($totalIncome) {
+                return [
+                    'category' => $item->category,
+                    'amount' => $item->total,
+                    'percentage' => $totalIncome > 0 ? ($item->total / $totalIncome) * 100 : 0
+                ];
+            });
+
+        // Top catégories de dépenses
+        $topExpenseCategories = Transaction::where('type', 'expense')
+            ->whereBetween('transaction_date', [$startDate, $endDate])
+            ->select('category', DB::raw('SUM(amount) as total'))
+            ->groupBy('category')
+            ->orderBy('total', 'desc')
+            ->limit(5)
+            ->get()
+            ->map(function ($item) use ($totalExpenses) {
+                return [
+                    'category' => $item->category,
+                    'amount' => $item->total,
+                    'percentage' => $totalExpenses > 0 ? ($item->total / $totalExpenses) * 100 : 0
+                ];
+            });
+
+        // Tendance mensuelle (12 derniers mois)
+        $monthlyTrend = [];
+        for ($i = 11; $i >= 0; $i--) {
+            $month = now()->subMonths($i);
+            $monthStart = $month->copy()->startOfMonth();
+            $monthEnd = $month->copy()->endOfMonth();
+
+            $income = Transaction::where('type', 'income')
+                ->whereBetween('transaction_date', [$monthStart, $monthEnd])
+                ->sum('amount');
+
+            $expenses = Transaction::where('type', 'expense')
+                ->whereBetween('transaction_date', [$monthStart, $monthEnd])
+                ->sum('amount');
+
+            $monthlyTrend[] = [
+                'month' => $month->format('Y-m'),
+                'income' => $income,
+                'expenses' => $expenses,
+                'profit' => $income - $expenses
+            ];
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'total_income' => $totalIncome,
+                'total_expenses' => $totalExpenses,
+                'net_profit' => $netProfit,
+                'profit_margin' => $profitMargin,
+                'monthly_income' => $monthlyIncome,
+                'monthly_expenses' => $monthlyExpenses,
+                'monthly_profit' => $monthlyProfit,
+                'yearly_income' => $yearlyIncome,
+                'yearly_expenses' => $yearlyExpenses,
+                'yearly_profit' => $yearlyProfit,
+                'top_income_categories' => $topIncomeCategories,
+                'top_expense_categories' => $topExpenseCategories,
+                'monthly_trend' => $monthlyTrend
+            ]
+        ]);
+    }
+
+    /**
+     * @group Gestion Financière
+     * 
+     * Récupérer les alertes financières
+     */
+    public function getAlerts(): JsonResponse
+    {
+        // Pour l'instant, retourner des alertes simulées
+        // TODO: Implémenter le système d'alertes avec le modèle FinancialAlert
+        $alerts = [
+            [
+                'id' => 1,
+                'type' => 'budget_exceeded',
+                'severity' => 'high',
+                'title' => 'Budget dépassé',
+                'message' => 'Le budget pour l\'alimentation a été dépassé de 15%',
+                'amount' => 150000,
+                'threshold' => 130000,
+                'is_read' => false,
+                'created_at' => now()->subHours(2)->toISOString()
+            ],
+            [
+                'id' => 2,
+                'type' => 'unusual_expense',
+                'severity' => 'medium',
+                'title' => 'Dépense inhabituelle',
+                'message' => 'Une dépense de 50000 FCFA a été enregistrée pour la médecine vétérinaire',
+                'amount' => 50000,
+                'threshold' => 25000,
+                'is_read' => false,
+                'created_at' => now()->subHours(5)->toISOString()
+            ],
+            [
+                'id' => 3,
+                'type' => 'low_balance',
+                'severity' => 'low',
+                'title' => 'Solde faible',
+                'message' => 'Le solde disponible est inférieur à 100000 FCFA',
+                'amount' => 75000,
+                'threshold' => 100000,
+                'is_read' => true,
+                'created_at' => now()->subDays(1)->toISOString()
+            ]
+        ];
+
+        return response()->json([
+            'success' => true,
+            'data' => $alerts
+        ]);
+    }
+
+    /**
+     * @group Gestion Financière
+     * 
+     * Marquer une alerte comme lue
+     */
+    public function markAlertAsRead(int $id): JsonResponse
+    {
+        // TODO: Implémenter la logique de marquage des alertes
+        return response()->json([
+            'success' => true,
+            'message' => 'Alerte marquée comme lue'
+        ]);
+    }
+
+    /**
+     * @group Gestion Financière
+     * 
+     * Récupérer les catégories financières
+     */
+    public function getCategories(): JsonResponse
+    {
+        $incomeCategories = Transaction::where('type', 'income')
+            ->distinct()
+            ->pluck('category')
+            ->toArray();
+
+        $expenseCategories = Transaction::where('type', 'expense')
+            ->distinct()
+            ->pluck('category')
+            ->toArray();
+
+        // Ajouter des catégories par défaut si aucune n'existe
+        if (empty($incomeCategories)) {
+            $incomeCategories = [
+                'Vente de produits',
+                'Vente de bétail',
+                'Vente de cultures',
+                'Subventions',
+                'Autres revenus'
+            ];
+        }
+
+        if (empty($expenseCategories)) {
+            $expenseCategories = [
+                'Alimentation',
+                'Médecine vétérinaire',
+                'Maintenance',
+                'Équipement',
+                'Personnel',
+                'Transport',
+                'Énergie',
+                'Autres dépenses'
+            ];
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'income_categories' => $incomeCategories,
+                'expense_categories' => $expenseCategories
+            ]
+        ]);
+    }
+
+    /**
+     * @group Gestion Financière
+     * 
+     * Exporter les données financières
+     */
+    public function exportData(Request $request): JsonResponse
+    {
+        // TODO: Implémenter l'export des données
+        return response()->json([
+            'success' => true,
+            'message' => 'Export en cours de développement'
+        ]);
+    }
+
+    /**
+     * @group Gestion Financière
+     * 
+     * Importer les données financières
+     */
+    public function importData(Request $request): JsonResponse
+    {
+        // TODO: Implémenter l'import des données
+        return response()->json([
+            'success' => true,
+            'message' => 'Import en cours de développement'
+        ]);
+    }
 }
