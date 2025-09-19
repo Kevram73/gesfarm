@@ -150,4 +150,5 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{notification}', [NotificationController::class, 'deleteNotification']);
         Route::get('/stats', [NotificationController::class, 'getNotificationStats']);
     });
+
 });

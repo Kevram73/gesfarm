@@ -1,0 +1,50 @@
+# Dossiers à ignorer lors du déploiement
+node_modules/
+.git/
+.github/
+docs/
+tests/
+storage/logs/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+storage/app/public/
+bootstrap/cache/
+vendor/
+.env
+.env.local
+.env.production
+.env.testing
+
+# Fichiers de développement
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.editorconfig
+.gitattributes
+.gitignore
+.htaccess
+webpack.mix.js
+vite.config.js
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Scripts de déploiement
+deploy.sh
+restart-docker.sh
+test-*.sh
+test-*.ps1
+fix-*.sh
+fix-*.ps1
+restart-*.ps1
+
+# Documentation
+*.md
+CORS_*.md
+DOCKER_*.md
+502_ERROR_*.md

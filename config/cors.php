@@ -28,6 +28,12 @@ return [
         'https://62.171.181.213:3000',
         'http://62.171.181.213',
         'https://62.171.181.213',
+        // URLs Vercel pour le frontend
+        'https://gesfarm-frontend.vercel.app',
+        'https://gesfarm-frontend-git-main.vercel.app',
+        'https://gesfarm-frontend-git-develop.vercel.app',
+        // Pattern pour toutes les URLs Vercel du frontend
+        'https://*.vercel.app',
     ],
 
     'allowed_origins_patterns' => [],

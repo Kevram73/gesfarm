@@ -1,0 +1,68 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "public/index.php",
+      "use": "@vercel/php"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "public/index.php"
+    },
+    {
+      "src": "/sanctum/(.*)",
+      "dest": "public/index.php"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "public/index.php"
+    }
+  ],
+  "env": {
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "APP_KEY": "base64:your-app-key-here",
+    "APP_URL": "https://your-app-name.vercel.app",
+    "DB_CONNECTION": "mysql",
+    "DB_HOST": "your-database-host",
+    "DB_PORT": "3306",
+    "DB_DATABASE": "your-database-name",
+    "DB_USERNAME": "your-database-username",
+    "DB_PASSWORD": "your-database-password",
+    "CACHE_DRIVER": "array",
+    "SESSION_DRIVER": "array",
+    "QUEUE_CONNECTION": "sync",
+    "MAIL_MAILER": "log"
+  },
+  "functions": {
+    "public/index.php": {
+      "maxDuration": 30,
+      "memory": 1024
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization, X-Requested-With, Accept"
+        },
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        }
+      ]
+    }
+  ]
+}
