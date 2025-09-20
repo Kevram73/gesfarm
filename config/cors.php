@@ -20,25 +20,16 @@ return [
     'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 
     'allowed_origins' => [
-
-        'https://gesfarm-web.vercel.app',
+        '*'
     ],
 
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => [
-        'Accept',
-        'Authorization',
-        'Content-Type',
-        'X-Requested-With',
-        'X-CSRF-TOKEN',
-        'X-XSRF-TOKEN',
-        'Origin',
-        'Access-Control-Request-Method',
-        'Access-Control-Request-Headers',
+        '*'
     ],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['*'],
 
     'max_age' => 86400, // 24 heures
 
