@@ -20,20 +20,8 @@ return [
     'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 
     'allowed_origins' => [
-        'http://localhost:3000',
-        'http://localhost:3001',
-        'http://127.0.0.1:3000',
-        'http://127.0.0.1:3001',
-        'http://62.171.181.213:3000',
-        'https://62.171.181.213:3000',
-        'http://62.171.181.213',
-        'https://62.171.181.213',
         // URLs Vercel pour le frontend
-        'https://gesfarm-frontend.vercel.app',
-        'https://gesfarm-frontend-git-main.vercel.app',
-        'https://gesfarm-frontend-git-develop.vercel.app',
-        // Pattern pour toutes les URLs Vercel du frontend
-        'https://*.vercel.app',
+        'https://gesfarm-web.vercel.app',
     ],
 
     'allowed_origins_patterns' => [],
