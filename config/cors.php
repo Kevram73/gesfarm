@@ -20,10 +20,7 @@ return [
     'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 
     'allowed_origins' => [
-<<<<<<< HEAD
-        // URLs Vercel pour le frontend
-=======
->>>>>>> 5a7faedead717b2e7ec516afcb552067d86315d9
+
         'https://gesfarm-web.vercel.app',
     ],
 
