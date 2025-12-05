@@ -58,11 +58,11 @@ jobs:
 
       - name: Setup SSH
         run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
+          sudo apt-get update || true
+          sudo apt-get install -y sshpass || true
           mkdir -p ~/.ssh
-          ssh-keyscan -H 72.60.188.146 >> ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
+          ssh-keyscan -H 72.60.188.146 >> ~/.ssh/known_hosts 2>/dev/null || true
+          chmod 600 ~/.ssh/known_hosts 2>/dev/null || true
 
       - name: Create deployment directory on server
         run: |
@@ -159,11 +159,11 @@ jobs:
     steps:
       - name: Setup SSH
         run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
+          sudo apt-get update || true
+          sudo apt-get install -y sshpass || true
           mkdir -p ~/.ssh
-          ssh-keyscan -H 72.60.188.146 >> ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
+          ssh-keyscan -H 72.60.188.146 >> ~/.ssh/known_hosts 2>/dev/null || true
+          chmod 600 ~/.ssh/known_hosts 2>/dev/null || true
 
       - name: Deploy with Docker Compose
         run: |
@@ -196,11 +196,11 @@ jobs:
     steps:
       - name: Setup SSH
         run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
+          sudo apt-get update || true
+          sudo apt-get install -y sshpass || true
           mkdir -p ~/.ssh
-          ssh-keyscan -H 72.60.188.146 >> ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
+          ssh-keyscan -H 72.60.188.146 >> ~/.ssh/known_hosts 2>/dev/null || true
+          chmod 600 ~/.ssh/known_hosts 2>/dev/null || true
 
       - name: Install dependencies in container
         run: |
@@ -241,11 +241,11 @@ jobs:
     steps:
       - name: Setup SSH
         run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
+          sudo apt-get update || true
+          sudo apt-get install -y sshpass || true
           mkdir -p ~/.ssh
-          ssh-keyscan -H 72.60.188.146 >> ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
+          ssh-keyscan -H 72.60.188.146 >> ~/.ssh/known_hosts 2>/dev/null || true
+          chmod 600 ~/.ssh/known_hosts 2>/dev/null || true
 
       - name: Verify deployment
         run: |
