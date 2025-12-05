@@ -43,7 +43,6 @@ jobs:
             public/
             resources/
             routes/
-            storage/
             docker/
 
   deploy-files:
@@ -91,7 +90,6 @@ jobs:
             public \
             resources \
             routes \
-            storage \
             docker \
             root@72.60.188.146:/var/www/farm-manager/
 
