@@ -1,0 +1,314 @@
+name: Deploy Farm Manager to Production
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch: # Permet de déclencher manuellement
+
+jobs:
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, xml, bcmath, gd, zip, pdo_mysql
+          coverage: none
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Create .env file for production
+        run: |
+          cat > .env.production << 'EOF'
+          APP_NAME="Farm Manager"
+          APP_ENV=production
+          APP_KEY=
+          APP_DEBUG=false
+          APP_URL=http://72.60.188.146:4010
+
+          LOG_CHANNEL=stack
+          LOG_LEVEL=error
+
+          DB_CONNECTION=mysql
+          DB_HOST=localhost
+          DB_PORT=3306
+          DB_DATABASE=farmmanager
+          DB_USERNAME=root
+          DB_PASSWORD=Alkashi13!!!%
+
+          BROADCAST_DRIVER=log
+          CACHE_DRIVER=file
+          FILESYSTEM_DISK=local
+          QUEUE_CONNECTION=sync
+          SESSION_DRIVER=file
+          SESSION_LIFETIME=120
+
+          REDIS_HOST=127.0.0.1
+          REDIS_PASSWORD=null
+          REDIS_PORT=6379
+
+          MAIL_MAILER=smtp
+          MAIL_HOST=mailpit
+          MAIL_PORT=1025
+          MAIL_USERNAME=null
+          MAIL_PASSWORD=null
+          MAIL_ENCRYPTION=null
+          MAIL_FROM_ADDRESS="noreply@farm-manager.com"
+          MAIL_FROM_NAME="Farm Manager"
+          EOF
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-files
+          path: |
+            .env.production
+            composer.json
+            composer.lock
+            package.json
+            package-lock.json
+            Dockerfile
+            docker-compose.yml
+            artisan
+            app/
+            bootstrap/
+            config/
+            database/
+            public/
+            resources/
+            routes/
+            storage/
+            docker/
+
+  deploy-files:
+    name: Deploy Files to Server
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-files
+
+      - name: Setup SSH
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 72.60.188.146 >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Create deployment directory on server
+        run: |
+          sshpass -p 'Alkashi13@@#' ssh -o StrictHostKeyChecking=no root@72.60.188.146 << 'ENDSSH'
+          mkdir -p /var/www/farm-manager
+          ENDSSH
+
+      - name: Copy files to server
+        run: |
+          # Copier les fichiers essentiels
+          sshpass -p 'Alkashi13@@#' scp -o StrictHostKeyChecking=no \
+            .env.production \
+            composer.json \
+            composer.lock \
+            package.json \
+            package-lock.json \
+            Dockerfile \
+            docker-compose.yml \
+            artisan \
+            root@72.60.188.146:/var/www/farm-manager/
+          
+          # Copier les dossiers
+          sshpass -p 'Alkashi13@@#' scp -o StrictHostKeyChecking=no -r \
+            app \
+            bootstrap \
+            config \
+            database \
+            public \
+            resources \
+            routes \
+            storage \
+            docker \
+            root@72.60.188.146:/var/www/farm-manager/
+
+      - name: Copy built assets
+        run: |
+          sshpass -p 'Alkashi13@@#' scp -o StrictHostKeyChecking=no -r \
+            public/build \
+            root@72.60.188.146:/var/www/farm-manager/public/ || echo "No build directory found"
+
+      - name: Setup environment on server
+        run: |
+          sshpass -p 'Alkashi13@@#' ssh -o StrictHostKeyChecking=no root@72.60.188.146 << 'ENDSSH'
+          set -e
+          cd /var/www/farm-manager
+          
+          # Renommer .env.production en .env
+          mv .env.production .env || true
+          
+          # Créer les dossiers nécessaires
+          mkdir -p storage/framework/cache/data
+          mkdir -p storage/framework/sessions
+          mkdir -p storage/framework/views
+          mkdir -p storage/logs
+          mkdir -p bootstrap/cache
+          
+          # Définir les permissions
+          chown -R www-data:www-data storage bootstrap/cache || true
+          chmod -R 775 storage bootstrap/cache || true
+          ENDSSH
+
+  deploy-docker:
+    name: Deploy with Docker
+    runs-on: ubuntu-latest
+    needs: deploy-files
+    
+    steps:
+      - name: Setup SSH
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 72.60.188.146 >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Deploy with Docker Compose
+        run: |
+          sshpass -p 'Alkashi13@@#' ssh -o StrictHostKeyChecking=no root@72.60.188.146 << 'ENDSSH'
+          set -e
+          cd /var/www/farm-manager
+          
+          # Arrêter les conteneurs existants
+          docker-compose down || true
+          
+          # Reconstruire les images
+          docker-compose build --no-cache
+          
+          # Démarrer les conteneurs
+          docker-compose up -d
+          
+          # Attendre que les services soient prêts
+          echo "⏳ Attente du démarrage des services..."
+          sleep 15
+          
+          # Vérifier le statut
+          docker-compose ps
+          ENDSSH
+
+  setup-app:
+    name: Setup Application
+    runs-on: ubuntu-latest
+    needs: deploy-docker
+    
+    steps:
+      - name: Setup SSH
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 72.60.188.146 >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Install dependencies in container
+        run: |
+          sshpass -p 'Alkashi13@@#' ssh -o StrictHostKeyChecking=no root@72.60.188.146 << 'ENDSSH'
+          cd /var/www/farm-manager
+          
+          # Installer les dépendances Composer dans le conteneur
+          docker-compose exec -T app composer install --no-dev --optimize-autoloader --no-interaction || true
+          
+          # Installer les dépendances NPM dans le conteneur
+          docker-compose exec -T app npm install || true
+          
+          # Générer la clé d'application si nécessaire
+          docker-compose exec -T app php artisan key:generate --force || true
+          
+          # Optimiser Laravel
+          docker-compose exec -T app php artisan config:cache || true
+          docker-compose exec -T app php artisan route:cache || true
+          docker-compose exec -T app php artisan view:cache || true
+          ENDSSH
+
+      - name: Run database migrations
+        continue-on-error: true
+        run: |
+          sshpass -p 'Alkashi13@@#' ssh -o StrictHostKeyChecking=no root@72.60.188.146 << 'ENDSSH'
+          cd /var/www/farm-manager
+          
+          # Attendre que la base de données soit prête
+          echo "⏳ Attente de la base de données..."
+          sleep 10
+          
+          # Exécuter les migrations
+          docker-compose exec -T app php artisan migrate --force || echo "⚠️ Migrations déjà à jour ou erreur (non bloquant)"
+          ENDSSH
+
+  verify:
+    name: Verify Deployment
+    runs-on: ubuntu-latest
+    needs: setup-app
+    
+    steps:
+      - name: Setup SSH
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 72.60.188.146 >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Verify deployment
+        run: |
+          sshpass -p 'Alkashi13@@#' ssh -o StrictHostKeyChecking=no root@72.60.188.146 << 'ENDSSH'
+          cd /var/www/farm-manager
+          
+          # Vérifier que les conteneurs tournent
+          if docker-compose ps | grep -q "Up"; then
+            echo "✅ Application déployée avec succès!"
+            echo "🌐 Accédez à: http://72.60.188.146:4010"
+            echo "🗄️  phpMyAdmin: http://72.60.188.146:8081"
+          else
+            echo "❌ Les conteneurs ne sont pas en cours d'exécution"
+            docker-compose ps
+            docker-compose logs --tail 50
+            exit 1
+          fi
+          ENDSSH
+
+      - name: Deployment Success
+        if: success()
+        run: |
+          echo "✅ Déploiement réussi!"
+          echo "🌐 Application disponible à: http://72.60.188.146:4010"
+          echo "🗄️  phpMyAdmin disponible à: http://72.60.188.146:8081"
+
+      - name: Deployment Failed
+        if: failure()
+        run: |
+          echo "❌ Déploiement échoué. Vérifiez les logs ci-dessus."
+          sshpass -p 'Alkashi13@@#' ssh -o StrictHostKeyChecking=no root@72.60.188.146 << 'ENDSSH'
+          cd /var/www/farm-manager
+          docker-compose logs --tail 100
+          ENDSSH

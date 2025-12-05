@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: farm-manager-app
+    container_name: farm-manager-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    network_mode: "host"  # Utiliser le réseau host pour accéder à MySQL local
+    volumes:
+      - ./:/var/www/html
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    environment:
+      - DB_HOST=localhost
+      - DB_PORT=3306
+      - DB_DATABASE=farmmanager
+      - DB_USERNAME=root
+      - DB_PASSWORD=Alkashi13!!!%
+
+  nginx:
+    image: nginx:alpine
+    container_name: farm-manager-nginx
+    restart: unless-stopped
+    ports:
+      - "4010:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: farm-manager-phpmyadmin
+    restart: unless-stopped
+    network_mode: "host"  # Utiliser le réseau host pour accéder à MySQL local
+    environment:
+      PMA_HOST: localhost
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: Alkashi13!!!%
+
