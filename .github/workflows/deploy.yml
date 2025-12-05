@@ -23,20 +23,8 @@ jobs:
           extensions: mbstring, xml, bcmath, gd, zip, pdo_mysql
           coverage: none
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-
       - name: Install Composer dependencies
         run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
-
-      - name: Install NPM dependencies
-        run: npm ci
-
-      - name: Build assets
-        run: npm run build
 
       - name: Create .env file for production
         run: |
@@ -86,8 +74,6 @@ jobs:
             .env.production
             composer.json
             composer.lock
-            package.json
-            package-lock.json
             Dockerfile
             docker-compose.yml
             artisan
@@ -133,8 +119,6 @@ jobs:
             .env.production \
             composer.json \
             composer.lock \
-            package.json \
-            package-lock.json \
             Dockerfile \
             docker-compose.yml \
             artisan \
@@ -153,11 +137,6 @@ jobs:
             docker \
             root@72.60.188.146:/var/www/farm-manager/
 
-      - name: Copy built assets
-        run: |
-          sshpass -p 'Alkashi13@@#' scp -o StrictHostKeyChecking=no -r \
-            public/build \
-            root@72.60.188.146:/var/www/farm-manager/public/ || echo "No build directory found"
 
       - name: Setup environment on server
         run: |
@@ -238,9 +217,6 @@ jobs:
           
           # Installer les dépendances Composer dans le conteneur
           docker-compose exec -T app composer install --no-dev --optimize-autoloader --no-interaction || true
-          
-          # Installer les dépendances NPM dans le conteneur
-          docker-compose exec -T app npm install || true
           
           # Générer la clé d'application si nécessaire
           docker-compose exec -T app php artisan key:generate --force || true
